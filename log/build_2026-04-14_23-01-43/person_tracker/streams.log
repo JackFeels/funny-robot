@@ -1,0 +1,27 @@
+[0.899s] Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/person_tracker': CMAKE_PREFIX_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/aarch64-linux-gnu/pkgconfig:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/lib/python3.10/site-packages:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/person_tracker build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/install.log --single-version-externally-managed install_data
+[1.198s] running egg_info
+[1.219s] writing ../../build/person_tracker/person_tracker.egg-info/PKG-INFO
+[1.220s] writing dependency_links to ../../build/person_tracker/person_tracker.egg-info/dependency_links.txt
+[1.220s] writing entry points to ../../build/person_tracker/person_tracker.egg-info/entry_points.txt
+[1.221s] writing requirements to ../../build/person_tracker/person_tracker.egg-info/requires.txt
+[1.221s] writing top-level names to ../../build/person_tracker/person_tracker.egg-info/top_level.txt
+[1.246s] reading manifest file '../../build/person_tracker/person_tracker.egg-info/SOURCES.txt'
+[1.256s] writing manifest file '../../build/person_tracker/person_tracker.egg-info/SOURCES.txt'
+[1.256s] running build
+[1.256s] running build_py
+[1.257s] copying person_tracker/__init__.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/build/lib/person_tracker
+[1.259s] copying person_tracker/person_tracker_node.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/build/lib/person_tracker
+[1.260s] running install
+[1.262s] running install_lib
+[1.280s] copying /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/build/lib/person_tracker/person_tracker_node.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/lib/python3.10/site-packages/person_tracker
+[1.283s] byte-compiling /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/lib/python3.10/site-packages/person_tracker/person_tracker_node.py to person_tracker_node.cpython-310.pyc
+[1.284s] running install_data
+[1.285s] copying resource/person_tracker -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/ament_index/resource_index/packages
+[1.285s] copying package.xml -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/person_tracker
+[1.285s] running install_egg_info
+[1.302s] removing '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/lib/python3.10/site-packages/person_tracker-0.0.1-py3.10.egg-info' (and everything under it)
+[1.305s] Copying ../../build/person_tracker/person_tracker.egg-info to /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/lib/python3.10/site-packages/person_tracker-0.0.1-py3.10.egg-info
+[1.309s] running install_scripts
+[1.327s] Installing person_tracker_node script to /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/lib/person_tracker
+[1.328s] writing list of installed files to '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/install.log'
+[1.344s] Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/person_tracker' returned '0': CMAKE_PREFIX_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/aarch64-linux-gnu/pkgconfig:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/lib/python3.10/site-packages:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/person_tracker build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/install.log --single-version-externally-managed install_data

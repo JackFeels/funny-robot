@@ -1,0 +1,23 @@
+[0.598s] Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_bringup_custom': PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/tb3_bringup_custom build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/install.log --single-version-externally-managed install_data
+[0.743s] running egg_info
+[0.751s] writing ../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/PKG-INFO
+[0.752s] writing dependency_links to ../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/dependency_links.txt
+[0.752s] writing requirements to ../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/requires.txt
+[0.752s] writing top-level names to ../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/top_level.txt
+[0.770s] reading manifest file '../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/SOURCES.txt'
+[0.771s] writing manifest file '../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/SOURCES.txt'
+[0.771s] running build
+[0.771s] running build_py
+[0.771s] copying tb3_bringup_custom/__init__.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/build/lib/tb3_bringup_custom
+[0.771s] running install
+[0.774s] running install_lib
+[0.783s] running install_data
+[0.783s] copying resource/tb3_bringup_custom -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/ament_index/resource_index/packages
+[0.783s] copying package.xml -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom
+[0.783s] copying launch/follow_demo.launch.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/launch
+[0.784s] running install_egg_info
+[0.792s] removing '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib/python3.10/site-packages/tb3_bringup_custom-0.0.1-py3.10.egg-info' (and everything under it)
+[0.806s] Copying ../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info to /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib/python3.10/site-packages/tb3_bringup_custom-0.0.1-py3.10.egg-info
+[0.807s] running install_scripts
+[0.824s] writing list of installed files to '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/install.log'
+[0.970s] Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_bringup_custom' returned '0': PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/tb3_bringup_custom build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/install.log --single-version-externally-managed install_data

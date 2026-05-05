@@ -1,0 +1,22 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from tb3_interfaces/msg/TrackedPerson.msg
+// generated code does not contain a copyright notice
+
+
+module tb3_interfaces {
+  module msg {
+    struct TrackedPerson {
+      int32 id;
+
+      float cx;
+
+      float cy;
+
+      float width;
+
+      float height;
+
+      float score;
+    };
+  };
+};

@@ -1,0 +1,31 @@
+running egg_info
+creating ../../build/gesture_detector/gesture_detector.egg-info
+writing ../../build/gesture_detector/gesture_detector.egg-info/PKG-INFO
+writing dependency_links to ../../build/gesture_detector/gesture_detector.egg-info/dependency_links.txt
+writing entry points to ../../build/gesture_detector/gesture_detector.egg-info/entry_points.txt
+writing requirements to ../../build/gesture_detector/gesture_detector.egg-info/requires.txt
+writing top-level names to ../../build/gesture_detector/gesture_detector.egg-info/top_level.txt
+writing manifest file '../../build/gesture_detector/gesture_detector.egg-info/SOURCES.txt'
+reading manifest file '../../build/gesture_detector/gesture_detector.egg-info/SOURCES.txt'
+writing manifest file '../../build/gesture_detector/gesture_detector.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector/build/lib/gesture_detector
+copying gesture_detector/gesture_detector_node.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector/build/lib/gesture_detector
+copying gesture_detector/__init__.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector/build/lib/gesture_detector
+running install
+running install_lib
+creating /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/lib/python3.10/site-packages/gesture_detector
+copying /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector/build/lib/gesture_detector/gesture_detector_node.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/lib/python3.10/site-packages/gesture_detector
+copying /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector/build/lib/gesture_detector/__init__.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/lib/python3.10/site-packages/gesture_detector
+byte-compiling /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/lib/python3.10/site-packages/gesture_detector/gesture_detector_node.py to gesture_detector_node.cpython-310.pyc
+byte-compiling /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/lib/python3.10/site-packages/gesture_detector/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/ament_index/resource_index/packages
+copying resource/gesture_detector -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/ament_index/resource_index/packages
+copying package.xml -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/gesture_detector
+running install_egg_info
+Copying ../../build/gesture_detector/gesture_detector.egg-info to /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/lib/python3.10/site-packages/gesture_detector-0.0.1-py3.10.egg-info
+running install_scripts
+Installing gesture_detector_node script to /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/lib/gesture_detector
+writing list of installed files to '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector/install.log'

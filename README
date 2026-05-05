@@ -1,0 +1,59 @@
+# PROYECTO_TURTLEBOT
+
+## Descripción
+Proyecto de programación y control de TurtleBot con ROS.
+
+## Requisitos Previos
+- ROS instalado
+- TurtleBot packages
+- Python 3.x
+
+## Instalación
+
+### 1. Clonar el repositorio
+
+## COMPILA
+cd ~/Documents/PROYECTO_TURTLEBOT
+source /opt/ros/humble/setup.bash
+colcon build
+source install/setup.bash
+
+## CAMARA
+
+# C922
+source /opt/ros/humble/setup.bash
+ros2 run v4l2_camera v4l2_camera_node --ros-args -p video_device:=/dev/video2 -p image_size:=[640,480]
+
+# FACETIME
+source /opt/ros/humble/setup.bash
+ros2 run v4l2_camera v4l2_camera_node --ros-args -p video_device:=/dev/video0 -p image_size:=[640,480]
+
+## GESTURE_DETECTOR
+
+source /opt/ros/humble/setup.bash
+source ~/Documents/PROYECTO_TURTLEBOT/install/setup.bash
+ros2 run gesture_detector gesture_detector_node --ros-args -p image_topic:=/image_raw
+
+## PERSON_TRACKER
+
+source /opt/ros/humble/setup.bash
+source ~/Documents/PROYECTO_TURTLEBOT/install/setup.bash
+ros2 run person_tracker person_tracker_node --ros-args -p image_topic:=/image_raw
+
+## TARGET_SELECTOR
+
+source /opt/ros/humble/setup.bash
+source ~/Documents/PROYECTO_TURTLEBOT/install/setup.bash
+ros2 run target_selector target_selector_node
+
+## FOLLOW_CONTROLLER
+
+source /opt/ros/humble/setup.bash
+source ~/Documents/PROYECTO_TURTLEBOT/install/setup.bash
+ros2 run follow_controller follow_controller_node
+
+## DEBUG_VISUALIZER
+
+source /opt/ros/humble/setup.bash
+source ~/Documents/PROYECTO_TURTLEBOT/install/setup.bash
+ros2 run debug_visualizer debug_visualizer_node --ros-args -p image_topic:=/image_raw

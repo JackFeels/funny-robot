@@ -1,0 +1,25 @@
+running egg_info
+writing ../../build/target_selector/target_selector.egg-info/PKG-INFO
+writing dependency_links to ../../build/target_selector/target_selector.egg-info/dependency_links.txt
+writing entry points to ../../build/target_selector/target_selector.egg-info/entry_points.txt
+writing requirements to ../../build/target_selector/target_selector.egg-info/requires.txt
+writing top-level names to ../../build/target_selector/target_selector.egg-info/top_level.txt
+reading manifest file '../../build/target_selector/target_selector.egg-info/SOURCES.txt'
+writing manifest file '../../build/target_selector/target_selector.egg-info/SOURCES.txt'
+running build
+running build_py
+copying target_selector/target_selector_node.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/target_selector/build/lib/target_selector
+copying target_selector/__init__.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/target_selector/build/lib/target_selector
+running install
+running install_lib
+copying /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/target_selector/build/lib/target_selector/target_selector_node.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/lib/python3.10/site-packages/target_selector
+byte-compiling /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/lib/python3.10/site-packages/target_selector/target_selector_node.py to target_selector_node.cpython-310.pyc
+running install_data
+copying resource/target_selector -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/ament_index/resource_index/packages
+copying package.xml -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/target_selector
+running install_egg_info
+removing '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/lib/python3.10/site-packages/target_selector-0.0.1-py3.10.egg-info' (and everything under it)
+Copying ../../build/target_selector/target_selector.egg-info to /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/lib/python3.10/site-packages/target_selector-0.0.1-py3.10.egg-info
+running install_scripts
+Installing target_selector_node script to /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/lib/target_selector
+writing list of installed files to '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/target_selector/install.log'

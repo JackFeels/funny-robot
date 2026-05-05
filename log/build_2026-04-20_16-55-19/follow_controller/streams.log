@@ -1,0 +1,25 @@
+[0.600s] Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/follow_controller': CMAKE_PREFIX_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/aarch64-linux-gnu/pkgconfig:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/lib/python3.10/site-packages:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/follow_controller build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/install.log --single-version-externally-managed install_data
+[0.734s] running egg_info
+[0.742s] writing ../../build/follow_controller/follow_controller.egg-info/PKG-INFO
+[0.742s] writing dependency_links to ../../build/follow_controller/follow_controller.egg-info/dependency_links.txt
+[0.742s] writing entry points to ../../build/follow_controller/follow_controller.egg-info/entry_points.txt
+[0.742s] writing requirements to ../../build/follow_controller/follow_controller.egg-info/requires.txt
+[0.742s] writing top-level names to ../../build/follow_controller/follow_controller.egg-info/top_level.txt
+[0.760s] reading manifest file '../../build/follow_controller/follow_controller.egg-info/SOURCES.txt'
+[0.760s] writing manifest file '../../build/follow_controller/follow_controller.egg-info/SOURCES.txt'
+[0.760s] running build
+[0.760s] running build_py
+[0.760s] copying follow_controller/follow_controller_node.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/build/lib/follow_controller
+[0.761s] copying follow_controller/__init__.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/build/lib/follow_controller
+[0.761s] running install
+[0.763s] running install_lib
+[0.771s] running install_data
+[0.771s] copying resource/follow_controller -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/ament_index/resource_index/packages
+[0.771s] copying package.xml -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/follow_controller
+[0.771s] running install_egg_info
+[0.780s] removing '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/lib/python3.10/site-packages/follow_controller-0.0.1-py3.10.egg-info' (and everything under it)
+[0.790s] Copying ../../build/follow_controller/follow_controller.egg-info to /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/lib/python3.10/site-packages/follow_controller-0.0.1-py3.10.egg-info
+[0.791s] running install_scripts
+[0.810s] Installing follow_controller_node script to /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/lib/follow_controller
+[0.810s] writing list of installed files to '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/install.log'
+[0.829s] Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/follow_controller' returned '0': CMAKE_PREFIX_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/aarch64-linux-gnu/pkgconfig:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/lib/python3.10/site-packages:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/follow_controller build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/install.log --single-version-externally-managed install_data

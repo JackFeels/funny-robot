@@ -1,0 +1,6 @@
+Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces': /usr/bin/cmake /home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_interfaces -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces
+Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces' returned '0': /usr/bin/cmake /home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_interfaces -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces
+Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces': /usr/bin/cmake --build /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces -- -j2 -l2
+Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces' returned '0': /usr/bin/cmake --build /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces -- -j2 -l2
+Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces': /usr/bin/cmake --install /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces
+Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces' returned '0': /usr/bin/cmake --install /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces

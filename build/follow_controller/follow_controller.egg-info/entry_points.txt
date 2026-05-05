@@ -1,0 +1,2 @@
+[console_scripts]
+follow_controller_node = follow_controller.follow_controller_node:main

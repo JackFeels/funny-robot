@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "tb3_interfaces__rs",
+		"source" : "/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces/tb3_interfaces__rs"
+	}
+}

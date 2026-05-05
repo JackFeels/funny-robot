@@ -1,0 +1,4 @@
+Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces': /usr/bin/cmake --build /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces -- -j6 -l6
+Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces' returned '0': /usr/bin/cmake --build /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces -- -j6 -l6
+Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces': /usr/bin/cmake --install /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces
+Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces' returned '0': /usr/bin/cmake --install /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces

@@ -1,0 +1,444 @@
+[0.073s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.073s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=4, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0xffffbcef2e90>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0xffffbd0cc910>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0xffffbd0cc910>>)
+[0.100s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.100s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.100s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.101s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.101s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.101s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.101s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT'
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.114s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(src/debug_visualizer) by extensions ['ignore', 'ignore_ament_install']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(src/debug_visualizer) by extension 'ignore'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(src/debug_visualizer) by extension 'ignore_ament_install'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(src/debug_visualizer) by extensions ['colcon_pkg']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(src/debug_visualizer) by extension 'colcon_pkg'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(src/debug_visualizer) by extensions ['colcon_meta']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(src/debug_visualizer) by extension 'colcon_meta'
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(src/debug_visualizer) by extensions ['ros']
+[0.115s] Level 1:colcon.colcon_core.package_identification:_identify(src/debug_visualizer) by extension 'ros'
+[0.117s] DEBUG:colcon.colcon_core.package_identification:Package 'src/debug_visualizer' with type 'ros.ament_python' and name 'debug_visualizer'
+[0.117s] Level 1:colcon.colcon_core.package_identification:_identify(src/follow_controller) by extensions ['ignore', 'ignore_ament_install']
+[0.117s] Level 1:colcon.colcon_core.package_identification:_identify(src/follow_controller) by extension 'ignore'
+[0.117s] Level 1:colcon.colcon_core.package_identification:_identify(src/follow_controller) by extension 'ignore_ament_install'
+[0.118s] Level 1:colcon.colcon_core.package_identification:_identify(src/follow_controller) by extensions ['colcon_pkg']
+[0.118s] Level 1:colcon.colcon_core.package_identification:_identify(src/follow_controller) by extension 'colcon_pkg'
+[0.118s] Level 1:colcon.colcon_core.package_identification:_identify(src/follow_controller) by extensions ['colcon_meta']
+[0.118s] Level 1:colcon.colcon_core.package_identification:_identify(src/follow_controller) by extension 'colcon_meta'
+[0.118s] Level 1:colcon.colcon_core.package_identification:_identify(src/follow_controller) by extensions ['ros']
+[0.118s] Level 1:colcon.colcon_core.package_identification:_identify(src/follow_controller) by extension 'ros'
+[0.119s] DEBUG:colcon.colcon_core.package_identification:Package 'src/follow_controller' with type 'ros.ament_python' and name 'follow_controller'
+[0.119s] Level 1:colcon.colcon_core.package_identification:_identify(src/gesture_detector) by extensions ['ignore', 'ignore_ament_install']
+[0.119s] Level 1:colcon.colcon_core.package_identification:_identify(src/gesture_detector) by extension 'ignore'
+[0.119s] Level 1:colcon.colcon_core.package_identification:_identify(src/gesture_detector) by extension 'ignore_ament_install'
+[0.119s] Level 1:colcon.colcon_core.package_identification:_identify(src/gesture_detector) by extensions ['colcon_pkg']
+[0.119s] Level 1:colcon.colcon_core.package_identification:_identify(src/gesture_detector) by extension 'colcon_pkg'
+[0.119s] Level 1:colcon.colcon_core.package_identification:_identify(src/gesture_detector) by extensions ['colcon_meta']
+[0.119s] Level 1:colcon.colcon_core.package_identification:_identify(src/gesture_detector) by extension 'colcon_meta'
+[0.119s] Level 1:colcon.colcon_core.package_identification:_identify(src/gesture_detector) by extensions ['ros']
+[0.120s] Level 1:colcon.colcon_core.package_identification:_identify(src/gesture_detector) by extension 'ros'
+[0.120s] DEBUG:colcon.colcon_core.package_identification:Package 'src/gesture_detector' with type 'ros.ament_python' and name 'gesture_detector'
+[0.120s] Level 1:colcon.colcon_core.package_identification:_identify(src/person_tracker) by extensions ['ignore', 'ignore_ament_install']
+[0.120s] Level 1:colcon.colcon_core.package_identification:_identify(src/person_tracker) by extension 'ignore'
+[0.120s] Level 1:colcon.colcon_core.package_identification:_identify(src/person_tracker) by extension 'ignore_ament_install'
+[0.120s] Level 1:colcon.colcon_core.package_identification:_identify(src/person_tracker) by extensions ['colcon_pkg']
+[0.120s] Level 1:colcon.colcon_core.package_identification:_identify(src/person_tracker) by extension 'colcon_pkg'
+[0.121s] Level 1:colcon.colcon_core.package_identification:_identify(src/person_tracker) by extensions ['colcon_meta']
+[0.121s] Level 1:colcon.colcon_core.package_identification:_identify(src/person_tracker) by extension 'colcon_meta'
+[0.121s] Level 1:colcon.colcon_core.package_identification:_identify(src/person_tracker) by extensions ['ros']
+[0.121s] Level 1:colcon.colcon_core.package_identification:_identify(src/person_tracker) by extension 'ros'
+[0.121s] DEBUG:colcon.colcon_core.package_identification:Package 'src/person_tracker' with type 'ros.ament_python' and name 'person_tracker'
+[0.121s] Level 1:colcon.colcon_core.package_identification:_identify(src/target_selector) by extensions ['ignore', 'ignore_ament_install']
+[0.122s] Level 1:colcon.colcon_core.package_identification:_identify(src/target_selector) by extension 'ignore'
+[0.122s] Level 1:colcon.colcon_core.package_identification:_identify(src/target_selector) by extension 'ignore_ament_install'
+[0.122s] Level 1:colcon.colcon_core.package_identification:_identify(src/target_selector) by extensions ['colcon_pkg']
+[0.122s] Level 1:colcon.colcon_core.package_identification:_identify(src/target_selector) by extension 'colcon_pkg'
+[0.122s] Level 1:colcon.colcon_core.package_identification:_identify(src/target_selector) by extensions ['colcon_meta']
+[0.122s] Level 1:colcon.colcon_core.package_identification:_identify(src/target_selector) by extension 'colcon_meta'
+[0.122s] Level 1:colcon.colcon_core.package_identification:_identify(src/target_selector) by extensions ['ros']
+[0.122s] Level 1:colcon.colcon_core.package_identification:_identify(src/target_selector) by extension 'ros'
+[0.122s] DEBUG:colcon.colcon_core.package_identification:Package 'src/target_selector' with type 'ros.ament_python' and name 'target_selector'
+[0.123s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_bringup_custom) by extensions ['ignore', 'ignore_ament_install']
+[0.123s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_bringup_custom) by extension 'ignore'
+[0.123s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_bringup_custom) by extension 'ignore_ament_install'
+[0.123s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_bringup_custom) by extensions ['colcon_pkg']
+[0.123s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_bringup_custom) by extension 'colcon_pkg'
+[0.123s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_bringup_custom) by extensions ['colcon_meta']
+[0.123s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_bringup_custom) by extension 'colcon_meta'
+[0.123s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_bringup_custom) by extensions ['ros']
+[0.123s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_bringup_custom) by extension 'ros'
+[0.123s] DEBUG:colcon.colcon_core.package_identification:Package 'src/tb3_bringup_custom' with type 'ros.ament_python' and name 'tb3_bringup_custom'
+[0.124s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[0.124s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_interfaces) by extension 'ignore'
+[0.124s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_interfaces) by extension 'ignore_ament_install'
+[0.124s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_interfaces) by extensions ['colcon_pkg']
+[0.124s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_interfaces) by extension 'colcon_pkg'
+[0.124s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_interfaces) by extensions ['colcon_meta']
+[0.124s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_interfaces) by extension 'colcon_meta'
+[0.124s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_interfaces) by extensions ['ros']
+[0.124s] Level 1:colcon.colcon_core.package_identification:_identify(src/tb3_interfaces) by extension 'ros'
+[0.124s] DEBUG:colcon.colcon_core.package_identification:Package 'src/tb3_interfaces' with type 'ros.catkin' and name 'tb3_interfaces'
+[0.125s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.127s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.127s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.127s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.128s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.144s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.144s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.145s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 12 installed packages in /home/jackfeels/turtlebot3_ws/install
+[0.146s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 397 installed packages in /opt/ros/humble
+[0.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.179s] Level 5:colcon.colcon_core.verb:set package 'gesture_detector' build argument 'cmake_args' from command line to 'None'
+[0.179s] Level 5:colcon.colcon_core.verb:set package 'gesture_detector' build argument 'cmake_target' from command line to 'None'
+[0.179s] Level 5:colcon.colcon_core.verb:set package 'gesture_detector' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.179s] Level 5:colcon.colcon_core.verb:set package 'gesture_detector' build argument 'cmake_clean_cache' from command line to 'False'
+[0.179s] Level 5:colcon.colcon_core.verb:set package 'gesture_detector' build argument 'cmake_clean_first' from command line to 'False'
+[0.179s] Level 5:colcon.colcon_core.verb:set package 'gesture_detector' build argument 'cmake_force_configure' from command line to 'False'
+[0.179s] Level 5:colcon.colcon_core.verb:set package 'gesture_detector' build argument 'ament_cmake_args' from command line to 'None'
+[0.179s] Level 5:colcon.colcon_core.verb:set package 'gesture_detector' build argument 'catkin_cmake_args' from command line to 'None'
+[0.179s] Level 5:colcon.colcon_core.verb:set package 'gesture_detector' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.179s] DEBUG:colcon.colcon_core.verb:Building package 'gesture_detector' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector', 'merge_install': False, 'path': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/gesture_detector', 'symlink_install': False, 'test_result_base': None}
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_bringup_custom' build argument 'cmake_args' from command line to 'None'
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_bringup_custom' build argument 'cmake_target' from command line to 'None'
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_bringup_custom' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_bringup_custom' build argument 'cmake_clean_cache' from command line to 'False'
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_bringup_custom' build argument 'cmake_clean_first' from command line to 'False'
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_bringup_custom' build argument 'cmake_force_configure' from command line to 'False'
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_bringup_custom' build argument 'ament_cmake_args' from command line to 'None'
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_bringup_custom' build argument 'catkin_cmake_args' from command line to 'None'
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_bringup_custom' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.180s] DEBUG:colcon.colcon_core.verb:Building package 'tb3_bringup_custom' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom', 'merge_install': False, 'path': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_bringup_custom', 'symlink_install': False, 'test_result_base': None}
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_interfaces' build argument 'cmake_args' from command line to 'None'
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_interfaces' build argument 'cmake_target' from command line to 'None'
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_interfaces' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.180s] Level 5:colcon.colcon_core.verb:set package 'tb3_interfaces' build argument 'cmake_clean_cache' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'tb3_interfaces' build argument 'cmake_clean_first' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'tb3_interfaces' build argument 'cmake_force_configure' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'tb3_interfaces' build argument 'ament_cmake_args' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'tb3_interfaces' build argument 'catkin_cmake_args' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'tb3_interfaces' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.181s] DEBUG:colcon.colcon_core.verb:Building package 'tb3_interfaces' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces', 'merge_install': False, 'path': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_interfaces', 'symlink_install': False, 'test_result_base': None}
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'debug_visualizer' build argument 'cmake_args' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'debug_visualizer' build argument 'cmake_target' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'debug_visualizer' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'debug_visualizer' build argument 'cmake_clean_cache' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'debug_visualizer' build argument 'cmake_clean_first' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'debug_visualizer' build argument 'cmake_force_configure' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'debug_visualizer' build argument 'ament_cmake_args' from command line to 'None'
+[0.182s] Level 5:colcon.colcon_core.verb:set package 'debug_visualizer' build argument 'catkin_cmake_args' from command line to 'None'
+[0.182s] Level 5:colcon.colcon_core.verb:set package 'debug_visualizer' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.182s] DEBUG:colcon.colcon_core.verb:Building package 'debug_visualizer' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/debug_visualizer', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer', 'merge_install': False, 'path': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/debug_visualizer', 'symlink_install': False, 'test_result_base': None}
+[0.182s] Level 5:colcon.colcon_core.verb:set package 'follow_controller' build argument 'cmake_args' from command line to 'None'
+[0.182s] Level 5:colcon.colcon_core.verb:set package 'follow_controller' build argument 'cmake_target' from command line to 'None'
+[0.182s] Level 5:colcon.colcon_core.verb:set package 'follow_controller' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.182s] Level 5:colcon.colcon_core.verb:set package 'follow_controller' build argument 'cmake_clean_cache' from command line to 'False'
+[0.182s] Level 5:colcon.colcon_core.verb:set package 'follow_controller' build argument 'cmake_clean_first' from command line to 'False'
+[0.182s] Level 5:colcon.colcon_core.verb:set package 'follow_controller' build argument 'cmake_force_configure' from command line to 'False'
+[0.182s] Level 5:colcon.colcon_core.verb:set package 'follow_controller' build argument 'ament_cmake_args' from command line to 'None'
+[0.182s] Level 5:colcon.colcon_core.verb:set package 'follow_controller' build argument 'catkin_cmake_args' from command line to 'None'
+[0.182s] Level 5:colcon.colcon_core.verb:set package 'follow_controller' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.182s] DEBUG:colcon.colcon_core.verb:Building package 'follow_controller' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller', 'merge_install': False, 'path': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/follow_controller', 'symlink_install': False, 'test_result_base': None}
+[0.183s] Level 5:colcon.colcon_core.verb:set package 'person_tracker' build argument 'cmake_args' from command line to 'None'
+[0.183s] Level 5:colcon.colcon_core.verb:set package 'person_tracker' build argument 'cmake_target' from command line to 'None'
+[0.183s] Level 5:colcon.colcon_core.verb:set package 'person_tracker' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.183s] Level 5:colcon.colcon_core.verb:set package 'person_tracker' build argument 'cmake_clean_cache' from command line to 'False'
+[0.183s] Level 5:colcon.colcon_core.verb:set package 'person_tracker' build argument 'cmake_clean_first' from command line to 'False'
+[0.183s] Level 5:colcon.colcon_core.verb:set package 'person_tracker' build argument 'cmake_force_configure' from command line to 'False'
+[0.183s] Level 5:colcon.colcon_core.verb:set package 'person_tracker' build argument 'ament_cmake_args' from command line to 'None'
+[0.183s] Level 5:colcon.colcon_core.verb:set package 'person_tracker' build argument 'catkin_cmake_args' from command line to 'None'
+[0.183s] Level 5:colcon.colcon_core.verb:set package 'person_tracker' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.183s] DEBUG:colcon.colcon_core.verb:Building package 'person_tracker' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker', 'merge_install': False, 'path': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/person_tracker', 'symlink_install': False, 'test_result_base': None}
+[0.183s] Level 5:colcon.colcon_core.verb:set package 'target_selector' build argument 'cmake_args' from command line to 'None'
+[0.184s] Level 5:colcon.colcon_core.verb:set package 'target_selector' build argument 'cmake_target' from command line to 'None'
+[0.184s] Level 5:colcon.colcon_core.verb:set package 'target_selector' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.184s] Level 5:colcon.colcon_core.verb:set package 'target_selector' build argument 'cmake_clean_cache' from command line to 'False'
+[0.184s] Level 5:colcon.colcon_core.verb:set package 'target_selector' build argument 'cmake_clean_first' from command line to 'False'
+[0.184s] Level 5:colcon.colcon_core.verb:set package 'target_selector' build argument 'cmake_force_configure' from command line to 'False'
+[0.184s] Level 5:colcon.colcon_core.verb:set package 'target_selector' build argument 'ament_cmake_args' from command line to 'None'
+[0.184s] Level 5:colcon.colcon_core.verb:set package 'target_selector' build argument 'catkin_cmake_args' from command line to 'None'
+[0.184s] Level 5:colcon.colcon_core.verb:set package 'target_selector' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.184s] DEBUG:colcon.colcon_core.verb:Building package 'target_selector' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/target_selector', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector', 'merge_install': False, 'path': '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/target_selector', 'symlink_install': False, 'test_result_base': None}
+[0.184s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.185s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.185s] INFO:colcon.colcon_ros.task.catkin.build:Building ROS package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_interfaces' with build type 'catkin'
+[0.185s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_interfaces'
+[0.187s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.187s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.187s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.200s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/gesture_detector' with build type 'ament_python'
+[0.200s] Level 1:colcon.colcon_core.shell:create_environment_hook('gesture_detector', 'ament_prefix_path')
+[0.200s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/gesture_detector/hook/ament_prefix_path.ps1'
+[0.201s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/gesture_detector/hook/ament_prefix_path.dsv'
+[0.201s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/gesture_detector/hook/ament_prefix_path.sh'
+[0.202s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.202s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.204s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_bringup_custom' with build type 'ament_python'
+[0.204s] Level 1:colcon.colcon_core.shell:create_environment_hook('tb3_bringup_custom', 'ament_prefix_path')
+[0.205s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/hook/ament_prefix_path.ps1'
+[0.205s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/hook/ament_prefix_path.dsv'
+[0.205s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/hook/ament_prefix_path.sh'
+[0.205s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.205s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.214s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces': /usr/bin/cmake --build /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces -- -j4 -l4
+[0.356s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/gesture_detector'
+[0.356s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.356s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.493s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_bringup_custom'
+[0.493s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.493s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.499s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces' returned '0': /usr/bin/cmake --build /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces -- -j4 -l4
+[0.506s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces': /usr/bin/cmake --install /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces
+[0.547s] Level 1:colcon.colcon_core.shell:create_environment_hook('tb3_interfaces', 'ros_package_path')
+[0.548s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/ros_package_path.ps1'
+[0.548s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/ros_package_path.dsv'
+[0.548s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/ros_package_path.sh'
+[0.549s] Level 1:colcon.colcon_ros.task.catkin:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages'
+[0.549s] Level 1:colcon.colcon_core.shell:create_environment_hook('tb3_interfaces', 'catkin_pythonpath')
+[0.549s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/catkin_pythonpath.ps1'
+[0.549s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/catkin_pythonpath.dsv'
+[0.549s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces' returned '0': /usr/bin/cmake --install /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_interfaces
+[0.549s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/catkin_pythonpath.sh'
+[0.550s] Level 1:colcon.colcon_core.shell:create_environment_hook('tb3_interfaces', 'pkg_config_path')
+[0.550s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/pkg_config_path.ps1'
+[0.550s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/pkg_config_path.dsv'
+[0.550s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/pkg_config_path.sh'
+[0.554s] Level 1:colcon.colcon_core.shell:create_environment_hook('tb3_interfaces', 'pkg_config_path_multiarch')
+[0.555s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/pkg_config_path_multiarch.ps1'
+[0.555s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/pkg_config_path_multiarch.dsv'
+[0.555s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/pkg_config_path_multiarch.sh'
+[0.556s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(tb3_interfaces)
+[0.557s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces' for CMake module files
+[0.557s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces' for CMake config files
+[0.558s] Level 1:colcon.colcon_core.shell:create_environment_hook('tb3_interfaces', 'cmake_prefix_path')
+[0.558s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/cmake_prefix_path.ps1'
+[0.558s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/cmake_prefix_path.dsv'
+[0.558s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/cmake_prefix_path.sh'
+[0.559s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib'
+[0.559s] Level 1:colcon.colcon_core.shell:create_environment_hook('tb3_interfaces', 'ld_library_path_lib')
+[0.559s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/ld_library_path_lib.ps1'
+[0.560s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/ld_library_path_lib.dsv'
+[0.560s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/hook/ld_library_path_lib.sh'
+[0.560s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/bin'
+[0.560s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig/tb3_interfaces.pc'
+[0.560s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/python3.10/site-packages'
+[0.560s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/bin'
+[0.561s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/package.ps1'
+[0.562s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/package.dsv'
+[0.562s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/package.sh'
+[0.563s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/package.bash'
+[0.563s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/tb3_interfaces/package.zsh'
+[0.564s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share/colcon-core/packages/tb3_interfaces)
+[0.564s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/debug_visualizer' with build type 'ament_python'
+[0.564s] Level 1:colcon.colcon_core.shell:create_environment_hook('debug_visualizer', 'ament_prefix_path')
+[0.565s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/share/debug_visualizer/hook/ament_prefix_path.ps1'
+[0.565s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/share/debug_visualizer/hook/ament_prefix_path.dsv'
+[0.565s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/share/debug_visualizer/hook/ament_prefix_path.sh'
+[0.565s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.565s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.568s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/follow_controller' with build type 'ament_python'
+[0.568s] Level 1:colcon.colcon_core.shell:create_environment_hook('follow_controller', 'ament_prefix_path')
+[0.568s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/follow_controller/hook/ament_prefix_path.ps1'
+[0.568s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/follow_controller/hook/ament_prefix_path.dsv'
+[0.569s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/follow_controller/hook/ament_prefix_path.sh'
+[0.569s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.569s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.717s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/debug_visualizer'
+[0.718s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.718s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.840s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/follow_controller'
+[0.840s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.840s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.845s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_bringup_custom': PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/tb3_bringup_custom build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/install.log --single-version-externally-managed install_data
+[0.848s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/gesture_detector': PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/gesture_detector build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector/install.log --single-version-externally-managed install_data
+[1.067s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector' for CMake module files
+[1.067s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector' for CMake config files
+[1.067s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/lib'
+[1.067s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/bin'
+[1.067s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/lib/pkgconfig/gesture_detector.pc'
+[1.067s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/lib/python3.10/site-packages'
+[1.067s] Level 1:colcon.colcon_core.shell:create_environment_hook('gesture_detector', 'pythonpath')
+[1.067s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/gesture_detector/hook/pythonpath.ps1'
+[1.068s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/gesture_detector/hook/pythonpath.dsv'
+[1.068s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/gesture_detector/hook/pythonpath.sh'
+[1.069s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/gesture_detector' returned '0': PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/gesture_detector build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/gesture_detector/install.log --single-version-externally-managed install_data
+[1.070s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/bin'
+[1.070s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(gesture_detector)
+[1.071s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/gesture_detector/package.ps1'
+[1.071s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/gesture_detector/package.dsv'
+[1.072s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/gesture_detector/package.sh'
+[1.072s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/gesture_detector/package.bash'
+[1.073s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/gesture_detector/package.zsh'
+[1.073s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/gesture_detector/share/colcon-core/packages/gesture_detector)
+[1.074s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/person_tracker' with build type 'ament_python'
+[1.074s] Level 1:colcon.colcon_core.shell:create_environment_hook('person_tracker', 'ament_prefix_path')
+[1.074s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/person_tracker/hook/ament_prefix_path.ps1'
+[1.075s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/person_tracker/hook/ament_prefix_path.dsv'
+[1.075s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/person_tracker/hook/ament_prefix_path.sh'
+[1.076s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.076s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.081s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom' for CMake module files
+[1.081s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom' for CMake config files
+[1.081s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib'
+[1.081s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/bin'
+[1.081s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib/pkgconfig/tb3_bringup_custom.pc'
+[1.081s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib/python3.10/site-packages'
+[1.081s] Level 1:colcon.colcon_core.shell:create_environment_hook('tb3_bringup_custom', 'pythonpath')
+[1.081s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/hook/pythonpath.ps1'
+[1.082s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/hook/pythonpath.dsv'
+[1.082s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/hook/pythonpath.sh'
+[1.083s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/bin'
+[1.083s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(tb3_bringup_custom)
+[1.083s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/package.ps1'
+[1.083s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/package.dsv'
+[1.083s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/package.sh'
+[1.084s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/package.bash'
+[1.084s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_bringup_custom' returned '0': PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/tb3_bringup_custom build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/install.log --single-version-externally-managed install_data
+[1.085s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/package.zsh'
+[1.085s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/colcon-core/packages/tb3_bringup_custom)
+[1.086s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/target_selector' with build type 'ament_python'
+[1.086s] Level 1:colcon.colcon_core.shell:create_environment_hook('target_selector', 'ament_prefix_path')
+[1.086s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/target_selector/hook/ament_prefix_path.ps1'
+[1.086s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/target_selector/hook/ament_prefix_path.dsv'
+[1.087s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/target_selector/hook/ament_prefix_path.sh'
+[1.087s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.087s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.216s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/person_tracker'
+[1.217s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.217s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.334s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/target_selector'
+[1.335s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.335s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.340s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/follow_controller': CMAKE_PREFIX_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/aarch64-linux-gnu/pkgconfig:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/lib/python3.10/site-packages:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/follow_controller build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/install.log --single-version-externally-managed install_data
+[1.340s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/debug_visualizer': CMAKE_PREFIX_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/aarch64-linux-gnu/pkgconfig:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/debug_visualizer/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/lib/python3.10/site-packages:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/debug_visualizer build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/debug_visualizer/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/debug_visualizer/install.log --single-version-externally-managed install_data
+[1.561s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller' for CMake module files
+[1.562s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/follow_controller' returned '0': CMAKE_PREFIX_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/aarch64-linux-gnu/pkgconfig:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/lib/python3.10/site-packages:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/follow_controller build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/follow_controller/install.log --single-version-externally-managed install_data
+[1.562s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller' for CMake config files
+[1.562s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/lib'
+[1.562s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/bin'
+[1.562s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/lib/pkgconfig/follow_controller.pc'
+[1.562s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/lib/python3.10/site-packages'
+[1.562s] Level 1:colcon.colcon_core.shell:create_environment_hook('follow_controller', 'pythonpath')
+[1.562s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/follow_controller/hook/pythonpath.ps1'
+[1.563s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/follow_controller/hook/pythonpath.dsv'
+[1.563s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/follow_controller/hook/pythonpath.sh'
+[1.563s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/bin'
+[1.563s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(follow_controller)
+[1.564s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/follow_controller/package.ps1'
+[1.564s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/follow_controller/package.dsv'
+[1.564s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/follow_controller/package.sh'
+[1.565s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/follow_controller/package.bash'
+[1.565s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/follow_controller/package.zsh'
+[1.565s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/follow_controller/share/colcon-core/packages/follow_controller)
+[1.579s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer' for CMake module files
+[1.580s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer' for CMake config files
+[1.580s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/lib'
+[1.580s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/bin'
+[1.580s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/lib/pkgconfig/debug_visualizer.pc'
+[1.580s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/lib/python3.10/site-packages'
+[1.580s] Level 1:colcon.colcon_core.shell:create_environment_hook('debug_visualizer', 'pythonpath')
+[1.580s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/share/debug_visualizer/hook/pythonpath.ps1'
+[1.581s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/share/debug_visualizer/hook/pythonpath.dsv'
+[1.581s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/share/debug_visualizer/hook/pythonpath.sh'
+[1.581s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/bin'
+[1.581s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(debug_visualizer)
+[1.582s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/share/debug_visualizer/package.ps1'
+[1.582s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/share/debug_visualizer/package.dsv'
+[1.583s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/share/debug_visualizer/package.sh'
+[1.583s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/share/debug_visualizer/package.bash'
+[1.584s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/debug_visualizer' returned '0': CMAKE_PREFIX_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/aarch64-linux-gnu/pkgconfig:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/debug_visualizer/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/lib/python3.10/site-packages:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/debug_visualizer build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/debug_visualizer/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/debug_visualizer/install.log --single-version-externally-managed install_data
+[1.584s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/share/debug_visualizer/package.zsh'
+[1.585s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/debug_visualizer/share/colcon-core/packages/debug_visualizer)
+[1.587s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/target_selector': CMAKE_PREFIX_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/aarch64-linux-gnu/pkgconfig:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/target_selector/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/lib/python3.10/site-packages:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/target_selector build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/target_selector/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/target_selector/install.log --single-version-externally-managed install_data
+[1.602s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/person_tracker': CMAKE_PREFIX_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/aarch64-linux-gnu/pkgconfig:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/lib/python3.10/site-packages:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/person_tracker build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/install.log --single-version-externally-managed install_data
+[1.814s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector' for CMake module files
+[1.815s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector' for CMake config files
+[1.815s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/target_selector' returned '0': CMAKE_PREFIX_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/aarch64-linux-gnu/pkgconfig:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/target_selector/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/lib/python3.10/site-packages:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/target_selector build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/target_selector/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/target_selector/install.log --single-version-externally-managed install_data
+[1.816s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/lib'
+[1.816s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/bin'
+[1.816s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/lib/pkgconfig/target_selector.pc'
+[1.816s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/lib/python3.10/site-packages'
+[1.816s] Level 1:colcon.colcon_core.shell:create_environment_hook('target_selector', 'pythonpath')
+[1.816s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/target_selector/hook/pythonpath.ps1'
+[1.816s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/target_selector/hook/pythonpath.dsv'
+[1.817s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/target_selector/hook/pythonpath.sh'
+[1.818s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/bin'
+[1.818s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(target_selector)
+[1.818s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/target_selector/package.ps1'
+[1.819s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/target_selector/package.dsv'
+[1.819s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/target_selector/package.sh'
+[1.819s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/target_selector/package.bash'
+[1.819s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/target_selector/package.zsh'
+[1.820s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/target_selector/share/colcon-core/packages/target_selector)
+[1.821s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker' for CMake module files
+[1.821s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/person_tracker' returned '0': CMAKE_PREFIX_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/aarch64-linux-gnu/pkgconfig:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/lib/pkgconfig PYTHONPATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/lib/python3.10/site-packages:/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_interfaces/share /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/person_tracker build --build-base /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/build install --record /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/person_tracker/install.log --single-version-externally-managed install_data
+[1.821s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker' for CMake config files
+[1.822s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/lib'
+[1.822s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/bin'
+[1.822s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/lib/pkgconfig/person_tracker.pc'
+[1.822s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/lib/python3.10/site-packages'
+[1.822s] Level 1:colcon.colcon_core.shell:create_environment_hook('person_tracker', 'pythonpath')
+[1.822s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/person_tracker/hook/pythonpath.ps1'
+[1.822s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/person_tracker/hook/pythonpath.dsv'
+[1.823s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/person_tracker/hook/pythonpath.sh'
+[1.823s] Level 1:colcon.colcon_core.environment:checking '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/bin'
+[1.823s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(person_tracker)
+[1.823s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/person_tracker/package.ps1'
+[1.824s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/person_tracker/package.dsv'
+[1.824s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/person_tracker/package.sh'
+[1.824s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/person_tracker/package.bash'
+[1.825s] INFO:colcon.colcon_core.shell:Creating package script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/person_tracker/package.zsh'
+[1.825s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/person_tracker/share/colcon-core/packages/person_tracker)
+[1.825s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[1.825s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[1.825s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[1.826s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[1.829s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[1.830s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[1.830s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[1.842s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[1.842s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/local_setup.ps1'
+[1.843s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/_local_setup_util_ps1.py'
+[1.844s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/setup.ps1'
+[1.846s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/local_setup.sh'
+[1.847s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/_local_setup_util_sh.py'
+[1.847s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/setup.sh'
+[1.848s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/local_setup.bash'
+[1.848s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/setup.bash'
+[1.849s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/local_setup.zsh'
+[1.849s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/setup.zsh'

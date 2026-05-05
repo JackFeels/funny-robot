@@ -1,0 +1,28 @@
+running egg_info
+creating ../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info
+writing ../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/PKG-INFO
+writing dependency_links to ../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/dependency_links.txt
+writing requirements to ../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/requires.txt
+writing top-level names to ../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/top_level.txt
+writing manifest file '../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/SOURCES.txt'
+reading manifest file '../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/SOURCES.txt'
+writing manifest file '../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/build/lib/tb3_bringup_custom
+copying tb3_bringup_custom/__init__.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/build/lib/tb3_bringup_custom
+running install
+running install_lib
+creating /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib/python3.10/site-packages/tb3_bringup_custom
+copying /home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/build/lib/tb3_bringup_custom/__init__.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib/python3.10/site-packages/tb3_bringup_custom
+byte-compiling /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib/python3.10/site-packages/tb3_bringup_custom/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/ament_index/resource_index/packages
+copying resource/tb3_bringup_custom -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/ament_index/resource_index/packages
+copying package.xml -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom
+creating /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/launch
+copying launch/follow_demo.launch.py -> /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/share/tb3_bringup_custom/launch
+running install_egg_info
+Copying ../../build/tb3_bringup_custom/tb3_bringup_custom.egg-info to /home/jackfeels/Documents/PROYECTO_TURTLEBOT/install/tb3_bringup_custom/lib/python3.10/site-packages/tb3_bringup_custom-0.0.1-py3.10.egg-info
+running install_scripts
+writing list of installed files to '/home/jackfeels/Documents/PROYECTO_TURTLEBOT/build/tb3_bringup_custom/install.log'
