@@ -7,13 +7,13 @@ def generate_launch_description():
             package='gesture_detector',
             executable='gesture_detector_node',
             name='gesture_detector_node',
-            parameters=[{'image_topic': '/camera/image_raw'}]
+            parameters=[{'image_topic': '/image_raw'}]
         ),
         Node(
             package='person_tracker',
             executable='person_tracker_node',
             name='person_tracker_node',
-            parameters=[{'image_topic': '/camera/image_raw'}]
+            parameters=[{'image_topic': '/image_raw'}]
         ),
         Node(
             package='target_selector',
@@ -29,6 +29,6 @@ def generate_launch_description():
             package='debug_visualizer',
             executable='debug_visualizer_node',
             name='debug_visualizer_node',
-            parameters=[{'image_topic': '/camera/image_raw'}]
+            parameters=[{'image_topic': '/image_raw'}]
         ),
     ])

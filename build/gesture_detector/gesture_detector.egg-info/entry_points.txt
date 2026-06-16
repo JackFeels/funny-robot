@@ -1,2 +1,0 @@
-[console_scripts]
-gesture_detector_node = gesture_detector.gesture_detector_node:main

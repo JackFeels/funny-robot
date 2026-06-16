@@ -1,6 +1,7 @@
 import cv2
 import rclpy
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
 
 from sensor_msgs.msg import Image
 from std_msgs.msg import Bool
@@ -25,8 +26,14 @@ class DebugVisualizerNode(Node):
         self.latest_people = []
         self.latest_target = None
 
+        # QoS sensor: best_effort + depth 1 para quedarnos con el frame mas reciente.
+        image_qos = QoSProfile(
+            depth=1,
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            history=HistoryPolicy.KEEP_LAST,
+        )
         self.image_sub = self.create_subscription(
-            Image, self.image_topic, self.image_callback, 10
+            Image, self.image_topic, self.image_callback, image_qos
         )
         self.greeting_sub = self.create_subscription(
             Bool, '/greeting_detected', self.greeting_callback, 10

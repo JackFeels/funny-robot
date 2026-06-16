@@ -2,6 +2,7 @@ import numpy as np
 
 import rclpy
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
 
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan
@@ -13,7 +14,15 @@ class FollowControllerNode(Node):
         super().__init__('follow_controller_node')
 
         self.target_sub = self.create_subscription(TargetInfo, '/target_info', self.target_callback, 10)
-        self.scan_sub = self.create_subscription(LaserScan, '/scan', self.scan_callback, 10)
+
+        # El LDS-01 publica /scan con QoS best_effort (sensor data). Un suscriptor
+        # reliable NO recibiria nada -> la evasion de obstaculos quedaria muerta.
+        scan_qos = QoSProfile(
+            depth=10,
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            history=HistoryPolicy.KEEP_LAST,
+        )
+        self.scan_sub = self.create_subscription(LaserScan, '/scan', self.scan_callback, scan_qos)
         self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
 
         self.current_target = None

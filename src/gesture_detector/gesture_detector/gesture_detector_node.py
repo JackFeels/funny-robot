@@ -2,6 +2,7 @@
 
 import rclpy
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
 
 from sensor_msgs.msg import Image
 from std_msgs.msg import Bool
@@ -23,8 +24,22 @@ class GestureDetectorNode(Node):
         self.declare_parameter('image_topic', '/image_raw')
         image_topic = self.get_parameter('image_topic').value
 
+        # Saltar frames: MediaPipe es lo mas caro del pipeline en la Jetson Nano.
+        # Procesar 1 de cada N frames reduce mucho la carga de CPU.
+        self.declare_parameter('process_every_n_frames', 2)
+        self.process_every_n_frames = int(self.get_parameter('process_every_n_frames').value)
+        self.frame_count = 0
+
+        # QoS sensor: best_effort + depth 1 para quedarnos siempre con el frame
+        # mas reciente y descartar los atrasados (evita acumular latencia).
+        image_qos = QoSProfile(
+            depth=1,
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            history=HistoryPolicy.KEEP_LAST,
+        )
+
         # Subscripción
-        self.create_subscription(Image, image_topic, self.image_callback, 10)
+        self.create_subscription(Image, image_topic, self.image_callback, image_qos)
 
         # Publicaciones
         self.greeting_pub = self.create_publisher(Bool, '/greeting_detected', 10)
@@ -35,6 +50,7 @@ class GestureDetectorNode(Node):
         self.hands = self.mp_hands.Hands(
             static_image_mode=False,
             max_num_hands=1,
+            model_complexity=0,  # modelo "lite": mas liviano, suficiente para palma abierta
             min_detection_confidence=0.45,
             min_tracking_confidence=0.45
         )
@@ -70,6 +86,10 @@ class GestureDetectorNode(Node):
         return raised >= 3
 
     def image_callback(self, msg: Image):
+        self.frame_count += 1
+        if self.frame_count % self.process_every_n_frames != 0:
+            return
+
         try:
             frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
         except Exception as e:
