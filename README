@@ -1,25 +1,42 @@
 # PROYECTO_TURTLEBOT
 
 ## Descripción
-Proyecto de programación y control de TurtleBot con ROS.
+Proyecto de programación y control de un TurtleBot3 con ROS 2 Humble.
+El robot detecta a una persona que lo saluda con la mano y la sigue.
+
+Hardware objetivo: TurtleBot3 + **Jetson Nano** (no Orin). Varias decisiones
+del código (HOG, salto de frames, MediaPipe lite, QoS best_effort) están
+pensadas para el límite de recursos de la Nano.
 
 ## Requisitos Previos
-- ROS instalado
-- TurtleBot packages
+- ROS 2 Humble instalado
+- Paquetes del TurtleBot3
 - Python 3.x
+- v4l2_camera (`sudo apt install ros-humble-v4l2-camera`)
+- MediaPipe (por pip; en la Jetson Nano usar el wheel para aarch64):
+  `pip3 install mediapipe`
 
 ## Instalación
 
 ### 1. Clonar el repositorio
+```bash
+cd ~/Documents
+git clone https://github.com/JackFeels/funny-robot.git
+cd funny-robot
+```
 
-## COMPILA
-cd ~/Documents/PROYECTO_TURTLEBOT
+### 2. Compilar
+```bash
 source /opt/ros/humble/setup.bash
 colcon build
 source install/setup.bash
+```
+
+> También podés usar el `Makefile`: `make build`, `make gesture`, `make tracker`, etc. (`make help`).
 
 ## CAMARA
 
+```bash
 # C922
 source /opt/ros/humble/setup.bash
 ros2 run v4l2_camera v4l2_camera_node --ros-args -p video_device:=/dev/video2 -p image_size:=[640,480]
@@ -27,33 +44,32 @@ ros2 run v4l2_camera v4l2_camera_node --ros-args -p video_device:=/dev/video2 -p
 # FACETIME
 source /opt/ros/humble/setup.bash
 ros2 run v4l2_camera v4l2_camera_node --ros-args -p video_device:=/dev/video0 -p image_size:=[640,480]
+```
 
-## GESTURE_DETECTOR
+## NODOS
 
-source /opt/ros/humble/setup.bash
-source ~/Documents/PROYECTO_TURTLEBOT/install/setup.bash
+Cada nodo en su propia terminal, tras `source /opt/ros/humble/setup.bash` y
+`source ~/Documents/funny-robot/install/setup.bash`.
+
+```bash
+# GESTURE_DETECTOR
 ros2 run gesture_detector gesture_detector_node --ros-args -p image_topic:=/image_raw
 
-## PERSON_TRACKER
-
-source /opt/ros/humble/setup.bash
-source ~/Documents/PROYECTO_TURTLEBOT/install/setup.bash
+# PERSON_TRACKER
 ros2 run person_tracker person_tracker_node --ros-args -p image_topic:=/image_raw
 
-## TARGET_SELECTOR
-
-source /opt/ros/humble/setup.bash
-source ~/Documents/PROYECTO_TURTLEBOT/install/setup.bash
+# TARGET_SELECTOR
 ros2 run target_selector target_selector_node
 
-## FOLLOW_CONTROLLER
-
-source /opt/ros/humble/setup.bash
-source ~/Documents/PROYECTO_TURTLEBOT/install/setup.bash
+# FOLLOW_CONTROLLER
 ros2 run follow_controller follow_controller_node
 
-## DEBUG_VISUALIZER
-
-source /opt/ros/humble/setup.bash
-source ~/Documents/PROYECTO_TURTLEBOT/install/setup.bash
+# DEBUG_VISUALIZER (idealmente correrlo en un PC remoto, no en la Nano: abre ventana OpenCV)
 ros2 run debug_visualizer debug_visualizer_node --ros-args -p image_topic:=/image_raw
+```
+
+## Launch (todo junto)
+
+```bash
+ros2 launch tb3_bringup_custom follow_demo.launch.py
+```

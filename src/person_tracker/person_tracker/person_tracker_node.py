@@ -5,6 +5,7 @@ import numpy as np
 
 import rclpy
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
 
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
@@ -39,7 +40,15 @@ class PersonTrackerNode(Node):
         self.image_topic = self.get_parameter('image_topic').value
 
         self.bridge = CvBridge()
-        self.image_sub = self.create_subscription(Image, self.image_topic, self.image_callback, 10)
+
+        # QoS sensor: best_effort + depth 1 para procesar siempre el frame mas
+        # reciente y descartar los atrasados (evita acumular latencia en la Nano).
+        image_qos = QoSProfile(
+            depth=1,
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            history=HistoryPolicy.KEEP_LAST,
+        )
+        self.image_sub = self.create_subscription(Image, self.image_topic, self.image_callback, image_qos)
         self.tracks_pub = self.create_publisher(TrackedPersonArray, '/tracked_persons', 10)
 
         self.hog = cv2.HOGDescriptor()

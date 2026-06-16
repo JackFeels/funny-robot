@@ -1,2 +1,0 @@
-[console_scripts]
-debug_visualizer_node = debug_visualizer.debug_visualizer_node:main

@@ -1,8 +1,0 @@
-{
-  "package_name": "tb3_interfaces",
-  "non_idl_tuples": [
-    "/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_interfaces:msg/TrackedPerson.msg",
-    "/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_interfaces:msg/TrackedPersonArray.msg",
-    "/home/jackfeels/Documents/PROYECTO_TURTLEBOT/src/tb3_interfaces:msg/TargetInfo.msg"
-  ]
-}

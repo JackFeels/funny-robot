@@ -1,6 +1,0 @@
-source;share/tb3_bringup_custom/hook/pythonpath.ps1
-source;share/tb3_bringup_custom/hook/pythonpath.dsv
-source;share/tb3_bringup_custom/hook/pythonpath.sh
-source;share/tb3_bringup_custom/hook/ament_prefix_path.ps1
-source;share/tb3_bringup_custom/hook/ament_prefix_path.dsv
-source;share/tb3_bringup_custom/hook/ament_prefix_path.sh
