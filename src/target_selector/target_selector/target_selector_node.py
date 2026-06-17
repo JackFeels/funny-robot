@@ -101,9 +101,17 @@ class TargetSelectorNode(Node):
                     self.target_pub.publish(target_msg)
                     return
 
-            # 3) Si no pudo recuperar, descontar tiempo
+            # 3) Si no pudo recuperar, descontar tiempo. Mientras dure la ventana
+            #    de gracia avisamos "searching" con la ultima posicion conocida,
+            #    para que el controlador gire a buscar en vez de frenar.
             self.last_seen_countdown -= 1
-            if self.last_seen_countdown <= 0:
+            if self.last_seen_countdown > 0 and self.last_target_position is not None:
+                target_msg.searching = True
+                target_msg.cx = self.last_target_position[0]
+                target_msg.cy = self.last_target_position[1]
+                self.target_pub.publish(target_msg)
+                return
+            else:
                 self.locked_id = -1
                 self.last_target_position = None
 

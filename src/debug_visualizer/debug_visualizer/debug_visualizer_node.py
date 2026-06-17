@@ -139,9 +139,19 @@ class DebugVisualizerNode(Node):
         if self.latest_target is not None:
             tid = self.latest_target.target_id
             tid_str = "HAND" if tid == -2 else str(tid)
-            target_text = f"Locked: {self.latest_target.locked} | Target ID: {tid_str}"
+            searching = getattr(self.latest_target, 'searching', False)
+            state = "LOCKED" if self.latest_target.locked else ("SEARCHING" if searching else "NONE")
+            target_text = f"State: {state} | Target ID: {tid_str}"
             cv2.putText(frame, target_text, (20, 65),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
+
+            # Al buscar, dibujar hacia donde se vio por ultima vez el objetivo
+            if searching and not self.latest_target.locked:
+                lx = int(self.latest_target.cx * w)
+                cv2.arrowedLine(frame, (w // 2, h - 30), (lx, h - 30),
+                                (0, 165, 255), 3, tipLength=0.3)
+                cv2.putText(frame, "BUSCANDO", (lx - 40, h - 40),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 165, 255), 2)
 
         cv2.imshow("Debug TurtleBot", frame)
         cv2.waitKey(1)

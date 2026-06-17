@@ -36,6 +36,7 @@ class FollowControllerNode(Node):
         self.declare_parameter('max_linear', 0.18)
         self.declare_parameter('max_angular', 0.9)
         self.declare_parameter('stop_distance', 0.45)
+        self.declare_parameter('search_angular', 0.5)  # giro minimo al buscar un target perdido
 
         self.desired_width = float(self.get_parameter('desired_width').value)
         self.linear_gain = float(self.get_parameter('linear_gain').value)
@@ -43,6 +44,7 @@ class FollowControllerNode(Node):
         self.max_linear = float(self.get_parameter('max_linear').value)
         self.max_angular = float(self.get_parameter('max_angular').value)
         self.stop_distance = float(self.get_parameter('stop_distance').value)
+        self.search_angular = float(self.get_parameter('search_angular').value)
 
         self.timer = self.create_timer(0.1, self.control_loop)
 
@@ -76,7 +78,25 @@ class FollowControllerNode(Node):
     def control_loop(self):
         twist = Twist()
 
-        if self.current_target is None or not self.current_target.locked:
+        target = self.current_target
+
+        # Sin objetivo y sin busqueda activa -> parar
+        if target is None or (not target.locked and not target.searching):
+            self.cmd_pub.publish(twist)
+            return
+
+        # Objetivo perdido hace poco: girar (sin avanzar) hacia su ultima
+        # direccion conocida para volver a meterlo en el encuadre. Esto cubre
+        # el caso de perderlo de vista al esquivar un obstaculo.
+        if not target.locked and target.searching:
+            error_x = target.cx - 0.5
+            angular = -self.angular_gain * error_x
+            # garantizar un giro minimo aunque la ultima posicion fuera central
+            if abs(angular) < self.search_angular:
+                angular = self.search_angular if error_x <= 0 else -self.search_angular
+            angular = max(-self.max_angular, min(self.max_angular, angular))
+            twist.linear.x = 0.0
+            twist.angular.z = angular
             self.cmd_pub.publish(twist)
             return
 
