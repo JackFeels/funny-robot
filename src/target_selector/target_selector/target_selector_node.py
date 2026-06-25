@@ -27,7 +27,10 @@ class TargetSelectorNode(Node):
         self.last_target_position = None
 
         self.greeting_countdown = 0
-        self.greeting_hold_frames = 10
+        # gesture_detector publica a ~30 Hz; con 30 frames mantenemos el saludo
+        # vivo ~1 s aun si el usuario lo intercala -> el frame del tracker
+        # (~10 Hz) lo atrapa con casi total seguridad.
+        self.greeting_hold_frames = 30
 
     def greeting_callback(self, msg: Bool):
         if msg.data:
@@ -116,7 +119,7 @@ class TargetSelectorNode(Node):
                 self.last_target_position = None
 
         # 4) Si no hay target bloqueado, intentar elegir uno con saludo + mano
-        if self.locked_id == -1 and self.latest_greeting and self.latest_hand is not None and len(self.latest_people) > 0:
+        if self.locked_id == -1 and self.latest_greeting and self.latest_hand is not None:
             hx, hy = self.latest_hand
 
             best_person = None
@@ -129,14 +132,16 @@ class TargetSelectorNode(Node):
                 x2 = p.cx + p.width / 2.0
                 y2 = p.cy + p.height / 2.0
 
-                # Expandimos la caja para tolerar mano levantada y cajas mal ajustadas
-                expand_x = p.width * 0.35
-                expand_y = p.height * 0.60
+                # Expandimos generosamente hacia arriba para mano levantada,
+                # y a los lados para cajas HOG mal ajustadas.
+                expand_x = p.width * 0.45
+                expand_top = p.height * 1.20  # mucho mas hacia arriba
+                expand_bot = p.height * 0.40
 
                 ex1 = x1 - expand_x
-                ey1 = y1 - expand_y
+                ey1 = y1 - expand_top
                 ex2 = x2 + expand_x
-                ey2 = y2 + expand_y
+                ey2 = y2 + expand_bot
 
                 hand_inside = (ex1 <= hx <= ex2) and (ey1 <= hy <= ey2)
 
@@ -162,12 +167,17 @@ class TargetSelectorNode(Node):
                 target_msg.cy = best_person.cy
                 target_msg.width = best_person.width
                 target_msg.height = best_person.height
-
-            elif self.latest_hand is not None:
-                # Fallback: HOG no detectó persona pero hay saludo+mano activos.
-                # Seguir usando el centro de la mano con ancho ficticio pequeño
-                # para que el robot se acerque hasta alcanzar desired_width.
+            else:
+                # Fallback: HOG no detecto a la persona O la mano quedo fuera de
+                # cualquier caja. Igual hay saludo+mano: lockear al centro de la
+                # mano con ancho ficticio para que el robot avance hasta acercarse.
+                # (Antes este fallback estaba dentro de "if len(people) > 0" y
+                #  nunca disparaba cuando HOG no detectaba nada.)
                 hx, hy = self.latest_hand
+                self.locked_id = -2
+                self.last_seen_countdown = self.max_lost_cycles
+                self.last_target_position = (hx, hy)
+
                 target_msg.locked = True
                 target_msg.target_id = -2
                 target_msg.cx = hx
