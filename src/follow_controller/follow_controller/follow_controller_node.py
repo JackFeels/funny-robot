@@ -32,11 +32,20 @@ class FollowControllerNode(Node):
 
         self.declare_parameter('desired_width', 0.25)
         self.declare_parameter('linear_gain', 0.6)
-        self.declare_parameter('angular_gain', 1.8)
+        # Bajado de 1.8 a 0.9: con tracker a ~5 Hz, el control de 10 Hz aplicaba
+        # 2 ticks del target viejo antes de recibir uno nuevo -> overshoot
+        # constante en el lockeo. Menos ganancia = menos overshoot.
+        self.declare_parameter('angular_gain', 0.9)
         self.declare_parameter('max_linear', 0.18)
-        self.declare_parameter('max_angular', 0.9)
+        # Bajado de 0.9 a 0.5: limita la velocidad maxima de giro para que el
+        # tracker tenga tiempo de re-encuadrar antes que el robot lo pierda.
+        self.declare_parameter('max_angular', 0.5)
         self.declare_parameter('stop_distance', 0.45)
-        self.declare_parameter('search_angular', 0.5)  # giro minimo al buscar un target perdido
+        # Bajado de 0.5 a 0.3: misma razon que max_angular.
+        self.declare_parameter('search_angular', 0.3)  # giro minimo al buscar un target perdido
+        # Zona muerta: si el target esta cerca del centro, no girar (evita
+        # oscilacion alrededor del centro por jitter del tracker).
+        self.declare_parameter('angular_deadband', 0.08)
 
         self.desired_width = float(self.get_parameter('desired_width').value)
         self.linear_gain = float(self.get_parameter('linear_gain').value)
@@ -45,6 +54,7 @@ class FollowControllerNode(Node):
         self.max_angular = float(self.get_parameter('max_angular').value)
         self.stop_distance = float(self.get_parameter('stop_distance').value)
         self.search_angular = float(self.get_parameter('search_angular').value)
+        self.angular_deadband = float(self.get_parameter('angular_deadband').value)
 
         self.timer = self.create_timer(0.1, self.control_loop)
 
@@ -103,8 +113,13 @@ class FollowControllerNode(Node):
         error_x = self.current_target.cx - 0.5
         target_width = self.current_target.width
 
-        angular = -self.angular_gain * error_x
-        angular = max(-self.max_angular, min(self.max_angular, angular))
+        # Deadband: si el target esta cerca del centro, no girar. Evita
+        # oscilacion por jitter del tracker cuando ya esta encuadrado.
+        if abs(error_x) < self.angular_deadband:
+            angular = 0.0
+        else:
+            angular = -self.angular_gain * error_x
+            angular = max(-self.max_angular, min(self.max_angular, angular))
 
         width_error = self.desired_width - target_width
         linear = self.linear_gain * width_error

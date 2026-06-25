@@ -59,7 +59,12 @@ class PersonTrackerNode(Node):
         self.max_missed = 8
 
         self.frame_count = 0
-        self.process_every_n_frames = 3
+        self.process_every_n_frames = 2
+
+        # HOG es cuadratico en pixeles -> procesar a 320x240 (4x mas rapido) y
+        # publicar coords normalizadas usando el tamaño reducido.
+        self.process_width = 320
+        self.process_height = 240
 
         self.get_logger().info(f'Person tracker listening on: {self.image_topic}')
 
@@ -110,20 +115,23 @@ class PersonTrackerNode(Node):
             self.get_logger().error(f'cv_bridge error: {e}')
             return
 
+        # Resize a baja resolucion para que HOG vuele en la Nano.
+        frame = cv2.resize(frame, (self.process_width, self.process_height))
+
         rects, _ = self.hog.detectMultiScale(
             frame,
-            winStride=(4, 8),
+            winStride=(8, 8),
             padding=(8, 8),
-            scale=1.05
+            scale=1.1
         )
 
         # NMS para quitar duplicados
         rects = self.non_max_suppression(rects, overlapThresh=0.5)
 
-        # Filtrar cajas pequeñas
+        # Filtrar cajas pequenas (escaladas al nuevo tamaño: ~30% del ancho/alto)
         filtered = []
         for (x, y, w, h) in rects:
-            if w >= 60 and h >= 120:
+            if w >= 30 and h >= 60:
                 filtered.append((x, y, w, h))
 
         rects = filtered
