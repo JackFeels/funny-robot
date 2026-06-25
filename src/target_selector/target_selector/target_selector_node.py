@@ -46,6 +46,10 @@ class TargetSelectorNode(Node):
             self.latest_hand = (msg.x, msg.y)
         else:
             self.latest_hand = None
+        # En modo HAND-only el lock depende solo de la mano (mediapipe ~30 Hz).
+        # No hace falta esperar al frame de HOG (~10 Hz) para refrescar el target.
+        if self.locked_id == -2:
+            self.update_target()
 
     def people_callback(self, msg: TrackedPersonArray):
         self.latest_people = msg.persons
@@ -59,6 +63,33 @@ class TargetSelectorNode(Node):
         target_msg.cy = 0.0
         target_msg.width = 0.0
         target_msg.height = 0.0
+
+        # 0) HAND-mode (target_id == -2): seguimos la mano directamente,
+        #    sin depender de IDs de HOG. Persiste mientras haya mano detectada.
+        if self.locked_id == -2:
+            if self.latest_hand is not None:
+                hx, hy = self.latest_hand
+                target_msg.locked = True
+                target_msg.target_id = -2
+                target_msg.cx = hx
+                target_msg.cy = hy
+                target_msg.width = 0.08
+                target_msg.height = 0.15
+                self.last_target_position = (hx, hy)
+                self.last_seen_countdown = self.max_lost_cycles
+                self.target_pub.publish(target_msg)
+                return
+            # Sin mano: misma ventana de gracia que HOG
+            self.last_seen_countdown -= 1
+            if self.last_seen_countdown > 0 and self.last_target_position is not None:
+                target_msg.searching = True
+                target_msg.cx = self.last_target_position[0]
+                target_msg.cy = self.last_target_position[1]
+                self.target_pub.publish(target_msg)
+                return
+            else:
+                self.locked_id = -1
+                self.last_target_position = None
 
         # 1) Si ya hay un target bloqueado, intentar mantenerlo por ID
         if self.locked_id != -1:
