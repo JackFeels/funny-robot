@@ -45,15 +45,18 @@ class GestureDetectorNode(Node):
         self.greeting_pub = self.create_publisher(Bool, '/greeting_detected', 10)
         self.hand_center_pub = self.create_publisher(Point, '/hand_center', 10)
 
-        # MediaPipe
+        # MediaPipe — compatible con 0.8.5 (sin model_complexity) y >=0.8.7 (con).
         self.mp_hands = mp.solutions.hands
-        self.hands = self.mp_hands.Hands(
+        hands_kwargs = dict(
             static_image_mode=False,
             max_num_hands=1,
-            model_complexity=0,  # modelo "lite": mas liviano, suficiente para palma abierta
             min_detection_confidence=0.45,
-            min_tracking_confidence=0.45
+            min_tracking_confidence=0.45,
         )
+        try:
+            self.hands = self.mp_hands.Hands(model_complexity=0, **hands_kwargs)
+        except TypeError:
+            self.hands = self.mp_hands.Hands(**hands_kwargs)
 
         # Memoria corta de mano
         self.last_hand_center = None
