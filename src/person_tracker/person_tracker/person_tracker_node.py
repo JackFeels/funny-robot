@@ -56,10 +56,16 @@ class PersonTrackerNode(Node):
 
         self.next_id = 1
         self.tracks = {}
-        self.max_missed = 8
+        # Elevado de 8 a 20: mientras el robot gira, HOG suele fallar 3-8 frames
+        # seguidos por motion blur; con 8 frames de tolerancia el track moria
+        # justo cuando el robot mas necesitaba mantenerlo.
+        self.max_missed = 20
 
         self.frame_count = 0
-        self.process_every_n_frames = 2
+        # 2 -> 1: procesar cada frame. HOG a 320x240 corre ~50 ms en Nano ->
+        # cuello de botella baja de ~10 Hz a ~18 Hz, mas rapido que el barrido
+        # de la camara al girar (evita perder al target).
+        self.process_every_n_frames = 1
 
         # HOG es cuadratico en pixeles -> procesar a 320x240 (4x mas rapido) y
         # publicar coords normalizadas usando el tamaño reducido.
@@ -157,7 +163,10 @@ class PersonTrackerNode(Node):
                     best_iou = score_iou
                     best_idx = idx
 
-            if best_idx >= 0 and best_iou > 0.3:
+            # IoU baja de 0.3 a 0.15: al girar el robot rapido, el bbox del
+            # target se desplaza en el frame y la IoU con el frame anterior
+            # cae; con 0.3 el matching fallaba y se creaba un ID nuevo.
+            if best_idx >= 0 and best_iou > 0.15:
                 det_box, _ = detections[best_idx]
                 used_detection_indices.add(best_idx)
                 updated_tracks[track_id] = {'bbox': det_box, 'missed': 0}

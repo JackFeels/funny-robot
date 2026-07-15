@@ -122,8 +122,10 @@ class TargetSelectorNode(Node):
                         best_dist = d
                         best_person = p
 
-                # Umbral de cercanía para reasignar
-                if best_person is not None and best_dist < 0.2:
+                # Umbral de cercanía para reasignar. 0.2 -> 0.35: al girar rapido
+                # el bbox salta hasta 20 % de frame entre updates de HOG, con 0.2
+                # el recover fallaba y perdiamos el lock al primer tramo giratorio.
+                if best_person is not None and best_dist < 0.35:
                     self.locked_id = best_person.id
 
                     target_msg.locked = True

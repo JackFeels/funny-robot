@@ -42,9 +42,10 @@ class FollowControllerNode(Node):
         # constante en el lockeo. Menos ganancia = menos overshoot.
         self.declare_parameter('angular_gain', 0.9)
         self.declare_parameter('max_linear', 0.18)
-        # Bajado de 0.9 a 0.5: limita la velocidad maxima de giro para que el
-        # tracker tenga tiempo de re-encuadrar antes que el robot lo pierda.
-        self.declare_parameter('max_angular', 0.5)
+        # Bajado 0.9 -> 0.5 -> 0.35: aun a 0.5 el barrido era ~5° por control
+        # tick, mas rapido que la actualizacion de HOG durante un giro largo.
+        # 0.35 mantiene el target dentro del alcance de la ventana IoU/proximity.
+        self.declare_parameter('max_angular', 0.35)
         self.declare_parameter('stop_distance', 0.45)
         # Bajado de 0.5 a 0.3: misma razon que max_angular.
         self.declare_parameter('search_angular', 0.3)  # giro minimo al buscar un target perdido
