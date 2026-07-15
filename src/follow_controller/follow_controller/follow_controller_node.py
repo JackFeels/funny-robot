@@ -66,6 +66,11 @@ class FollowControllerNode(Node):
         # y la evasion no ve los obstaculos reales de adelante. Medido con una
         # caja al frente de la camara: la caja aparecia a -37 -> offset = +37.
         self.declare_parameter('lidar_yaw_offset_deg', 37.0)
+        # Umbral inferior de rango: el LDS-01 ve partes del propio robot
+        # (chasis, soporte de la camara C920) a ~14 cm y sin este filtro
+        # el min() del sector "frente" siempre daba 0.14 m -> evasion eterna
+        # aunque no hubiera nada real adelante. 18 cm limpia el auto-eco.
+        self.declare_parameter('min_obstacle_range', 0.18)
 
         self.desired_width = float(self.get_parameter('desired_width').value)
         self.linear_gain = float(self.get_parameter('linear_gain').value)
@@ -79,6 +84,7 @@ class FollowControllerNode(Node):
         self.hand_max_linear = float(self.get_parameter('hand_max_linear').value)
         self.target_timeout = float(self.get_parameter('target_timeout').value)
         self.lidar_yaw_offset = np.radians(float(self.get_parameter('lidar_yaw_offset_deg').value))
+        self.min_obstacle_range = float(self.get_parameter('min_obstacle_range').value)
 
         self.timer = self.create_timer(0.1, self.control_loop)
 
@@ -90,10 +96,10 @@ class FollowControllerNode(Node):
         hi = np.radians(hi_deg)
         mask = (angles >= lo) & (angles <= hi)
         vals = ranges[mask]
-        # El LDS reporta 0.0 (o < range_min) en mediciones invalidas; sin este
-        # filtro min() daria 0 y el robot creeria que hay un obstaculo pegado
-        # SIEMPRE -> quedaria en modo evasion eterna.
-        vals = vals[np.isfinite(vals) & (vals > self.range_min)]
+        # Doble filtro: (a) 0.0 y sub-range_min invalidos del LDS, y
+        # (b) auto-eco del robot (chasis/soporte camara ~14 cm).
+        floor = max(self.range_min, self.min_obstacle_range)
+        vals = vals[np.isfinite(vals) & (vals > floor)]
         return float(np.min(vals)) if len(vals) > 0 else 999.0
 
     def target_callback(self, msg: TargetInfo):
