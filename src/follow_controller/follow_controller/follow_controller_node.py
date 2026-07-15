@@ -173,11 +173,13 @@ class FollowControllerNode(Node):
 
         if self.front_obstacle_distance < self.stop_distance:
             linear = min(0.0, linear)
-            # Girar hacia el lado con más espacio libre
+            # Girar suave hacia el lado con mas espacio libre. A max_angular
+            # contra un mueble era agresivo y barria el frente contra el.
+            avoid_turn = min(0.3, self.max_angular)
             if self.left_obstacle_distance >= self.right_obstacle_distance:
-                angular = self.max_angular   # gira izquierda
+                angular = avoid_turn    # gira izquierda
             else:
-                angular = -self.max_angular  # gira derecha
+                angular = -avoid_turn   # gira derecha
 
         twist.linear.x = linear
         twist.angular.z = angular

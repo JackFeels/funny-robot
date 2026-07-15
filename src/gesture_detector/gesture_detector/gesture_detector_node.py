@@ -50,8 +50,8 @@ class GestureDetectorNode(Node):
         hands_kwargs = dict(
             static_image_mode=False,
             max_num_hands=1,
-            min_detection_confidence=0.45,
-            min_tracking_confidence=0.45,
+            min_detection_confidence=0.60,
+            min_tracking_confidence=0.50,
         )
         try:
             self.hands = self.mp_hands.Hands(model_complexity=0, **hands_kwargs)
@@ -67,26 +67,47 @@ class GestureDetectorNode(Node):
         self.greeting_countdown = 0
         self.greeting_hold_frames = 6
 
+        # Debounce: exigir palma abierta en N frames procesados consecutivos
+        # antes de declarar saludo. Un falso positivo de un solo frame (punio
+        # mal interpretado, blur de movimiento) ya no dispara el lock.
+        self.greeting_streak = 0
+        self.greeting_min_streak = 3
+
         self.get_logger().info(f"Gesture Detector iniciado en tópico: {image_topic}")
 
     def is_open_palm(self, landmarks):
         lm = self.mp_hands.HandLandmark
         wrist = landmarks[lm.WRIST]
 
-        def extended(tip_idx, mcp_idx):
+        def dist(a, b):
+            return ((a.x - b.x) ** 2 + (a.y - b.y) ** 2) ** 0.5
+
+        # Mano muy chica en el frame (lejos o ruido): los landmarks no son
+        # confiables y un punio puede pasar como palma. Ignorar.
+        palm_size = dist(landmarks[lm.MIDDLE_FINGER_MCP], wrist)
+        if palm_size < 0.06:
+            return False
+
+        def extended(tip_idx, pip_idx, mcp_idx):
             tip = landmarks[tip_idx]
+            pip = landmarks[pip_idx]
             mcp = landmarks[mcp_idx]
-            d_tip = ((tip.x - wrist.x) ** 2 + (tip.y - wrist.y) ** 2) ** 0.5
-            d_mcp = ((mcp.x - wrist.x) ** 2 + (mcp.y - wrist.y) ** 2) ** 0.5
-            return d_tip > d_mcp * 1.3
+            # Dedo estirado: tip mas lejos de la muneca que el PIP y bastante
+            # mas lejos que el MCP. En un punio el tip se pliega y cae cerca
+            # (o detras) del MCP -> ambas condiciones fallan. La version
+            # anterior (tip vs MCP con 1.3, 3 de 4 dedos) dejaba pasar punios.
+            d_tip = dist(tip, wrist)
+            return d_tip > dist(pip, wrist) * 1.10 and d_tip > dist(mcp, wrist) * 1.35
 
         raised = sum([
-            extended(lm.INDEX_FINGER_TIP,  lm.INDEX_FINGER_MCP),
-            extended(lm.MIDDLE_FINGER_TIP, lm.MIDDLE_FINGER_MCP),
-            extended(lm.RING_FINGER_TIP,   lm.RING_FINGER_MCP),
-            extended(lm.PINKY_TIP,         lm.PINKY_MCP),
+            extended(lm.INDEX_FINGER_TIP,  lm.INDEX_FINGER_PIP,  lm.INDEX_FINGER_MCP),
+            extended(lm.MIDDLE_FINGER_TIP, lm.MIDDLE_FINGER_PIP, lm.MIDDLE_FINGER_MCP),
+            extended(lm.RING_FINGER_TIP,   lm.RING_FINGER_PIP,   lm.RING_FINGER_MCP),
+            extended(lm.PINKY_TIP,         lm.PINKY_PIP,         lm.PINKY_MCP),
         ])
-        return raised >= 3
+        # Palma abierta de verdad: los 4 dedos estirados (un saludo natural
+        # siempre los tiene; pedir 3 dejaba pasar medio-punios).
+        return raised >= 4
 
     def image_callback(self, msg: Image):
         self.frame_count += 1
@@ -142,12 +163,16 @@ class GestureDetectorNode(Node):
             else:
                 self.last_hand_center = None
 
-        # Memoria corta de greeting
+        # Debounce + memoria corta de greeting
         if greeting_detected_now:
-            self.greeting_countdown = self.greeting_hold_frames
+            self.greeting_streak += 1
         else:
-            if self.greeting_countdown > 0:
-                self.greeting_countdown -= 1
+            self.greeting_streak = 0
+
+        if self.greeting_streak >= self.greeting_min_streak:
+            self.greeting_countdown = self.greeting_hold_frames
+        elif self.greeting_countdown > 0:
+            self.greeting_countdown -= 1
 
         greeting_msg.data = self.greeting_countdown > 0
 
