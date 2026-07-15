@@ -1,4 +1,5 @@
 import math
+import time
 
 import rclpy
 from rclpy.node import Node
@@ -22,8 +23,11 @@ class TargetSelectorNode(Node):
         self.latest_hand = None
         self.latest_people = []
         self.locked_id = -1
-        self.last_seen_countdown = 0
-        self.max_lost_cycles = 30 # Numero de ciclos que se considera que el objetivo sigue presente después de perderlo de vista.
+        # Ventana de gracia en TIEMPO REAL (no ciclos): update_target puede
+        # correr a ~10 Hz (HOG) o ~40 Hz (hand-mode), y con un contador de
+        # ciclos la misma constante daba 3 s o 0.7 s segun el modo.
+        self.lost_grace_seconds = 3.0
+        self.lost_deadline = 0.0
         self.last_target_position = None
 
         self.greeting_countdown = 0
@@ -76,12 +80,11 @@ class TargetSelectorNode(Node):
                 target_msg.width = 0.08
                 target_msg.height = 0.15
                 self.last_target_position = (hx, hy)
-                self.last_seen_countdown = self.max_lost_cycles
+                self.lost_deadline = time.monotonic() + self.lost_grace_seconds
                 self.target_pub.publish(target_msg)
                 return
             # Sin mano: misma ventana de gracia que HOG
-            self.last_seen_countdown -= 1
-            if self.last_seen_countdown > 0 and self.last_target_position is not None:
+            if time.monotonic() < self.lost_deadline and self.last_target_position is not None:
                 target_msg.searching = True
                 target_msg.cx = self.last_target_position[0]
                 target_msg.cy = self.last_target_position[1]
@@ -103,7 +106,7 @@ class TargetSelectorNode(Node):
                     target_msg.height = p.height
 
                     self.last_target_position = (p.cx, p.cy)
-                    self.last_seen_countdown = self.max_lost_cycles
+                    self.lost_deadline = time.monotonic() + self.lost_grace_seconds
                     self.target_pub.publish(target_msg)
                     return
 
@@ -131,15 +134,14 @@ class TargetSelectorNode(Node):
                     target_msg.height = best_person.height
 
                     self.last_target_position = (best_person.cx, best_person.cy)
-                    self.last_seen_countdown = self.max_lost_cycles
+                    self.lost_deadline = time.monotonic() + self.lost_grace_seconds
                     self.target_pub.publish(target_msg)
                     return
 
             # 3) Si no pudo recuperar, descontar tiempo. Mientras dure la ventana
             #    de gracia avisamos "searching" con la ultima posicion conocida,
             #    para que el controlador gire a buscar en vez de frenar.
-            self.last_seen_countdown -= 1
-            if self.last_seen_countdown > 0 and self.last_target_position is not None:
+            if time.monotonic() < self.lost_deadline and self.last_target_position is not None:
                 target_msg.searching = True
                 target_msg.cx = self.last_target_position[0]
                 target_msg.cy = self.last_target_position[1]
@@ -189,7 +191,7 @@ class TargetSelectorNode(Node):
 
             if best_person is not None:
                 self.locked_id = best_person.id
-                self.last_seen_countdown = self.max_lost_cycles
+                self.lost_deadline = time.monotonic() + self.lost_grace_seconds
                 self.last_target_position = (best_person.cx, best_person.cy)
 
                 target_msg.locked = True
@@ -206,7 +208,7 @@ class TargetSelectorNode(Node):
                 #  nunca disparaba cuando HOG no detectaba nada.)
                 hx, hy = self.latest_hand
                 self.locked_id = -2
-                self.last_seen_countdown = self.max_lost_cycles
+                self.lost_deadline = time.monotonic() + self.lost_grace_seconds
                 self.last_target_position = (hx, hy)
 
                 target_msg.locked = True

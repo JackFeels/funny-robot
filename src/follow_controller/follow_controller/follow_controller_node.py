@@ -1,3 +1,6 @@
+import signal
+import time
+
 import numpy as np
 
 import rclpy
@@ -26,9 +29,11 @@ class FollowControllerNode(Node):
         self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
 
         self.current_target = None
+        self.last_target_time = 0.0
         self.front_obstacle_distance = 999.0
         self.left_obstacle_distance  = 999.0
         self.right_obstacle_distance = 999.0
+        self.range_min = 0.05  # actualizado con cada scan; filtra los 0.0 invalidos del LDS
 
         self.declare_parameter('desired_width', 0.25)
         self.declare_parameter('linear_gain', 0.6)
@@ -46,6 +51,16 @@ class FollowControllerNode(Node):
         # Zona muerta: si el target esta cerca del centro, no girar (evita
         # oscilacion alrededor del centro por jitter del tracker).
         self.declare_parameter('angular_deadband', 0.08)
+        # Los Dynamixel no vencen la friccion estatica con comandos muy chicos:
+        # pedidos < ~0.04 m/s no mueven el robot (stall silencioso).
+        self.declare_parameter('min_linear', 0.05)
+        # En modo HAND (target_id=-2) el ancho es ficticio y no hay estimacion
+        # de distancia por bbox -> capear el avance y dejar que el LiDAR
+        # (stop_distance) sea quien frene cerca de la persona.
+        self.declare_parameter('hand_max_linear', 0.10)
+        # Si /target_info deja de llegar (murio el selector/tracker/camara),
+        # detenerse en vez de repetir el ultimo comando para siempre.
+        self.declare_parameter('target_timeout', 0.8)
 
         self.desired_width = float(self.get_parameter('desired_width').value)
         self.linear_gain = float(self.get_parameter('linear_gain').value)
@@ -55,21 +70,32 @@ class FollowControllerNode(Node):
         self.stop_distance = float(self.get_parameter('stop_distance').value)
         self.search_angular = float(self.get_parameter('search_angular').value)
         self.angular_deadband = float(self.get_parameter('angular_deadband').value)
+        self.min_linear = float(self.get_parameter('min_linear').value)
+        self.hand_max_linear = float(self.get_parameter('hand_max_linear').value)
+        self.target_timeout = float(self.get_parameter('target_timeout').value)
 
         self.timer = self.create_timer(0.1, self.control_loop)
+
+    def publish_stop(self):
+        self.cmd_pub.publish(Twist())
 
     def _sector_min(self, ranges, angles, lo_deg, hi_deg):
         lo = np.radians(lo_deg)
         hi = np.radians(hi_deg)
         mask = (angles >= lo) & (angles <= hi)
         vals = ranges[mask]
-        vals = vals[np.isfinite(vals)]
+        # El LDS reporta 0.0 (o < range_min) en mediciones invalidas; sin este
+        # filtro min() daria 0 y el robot creeria que hay un obstaculo pegado
+        # SIEMPRE -> quedaria en modo evasion eterna.
+        vals = vals[np.isfinite(vals) & (vals > self.range_min)]
         return float(np.min(vals)) if len(vals) > 0 else 999.0
 
     def target_callback(self, msg: TargetInfo):
         self.current_target = msg
+        self.last_target_time = time.monotonic()
 
     def scan_callback(self, msg: LaserScan):
+        self.range_min = max(0.05, float(msg.range_min))
         n = len(msg.ranges)
         if n == 0:
             self.front_obstacle_distance = 999.0
@@ -89,6 +115,13 @@ class FollowControllerNode(Node):
         twist = Twist()
 
         target = self.current_target
+
+        # Watchdog: si /target_info dejo de llegar (nodo upstream muerto),
+        # el ultimo target queda congelado -> sin esto el robot repetiria
+        # el ultimo comando para siempre.
+        if target is not None and (time.monotonic() - self.last_target_time) > self.target_timeout:
+            self.current_target = None
+            target = None
 
         # Sin objetivo y sin busqueda activa -> parar
         if target is None or (not target.locked and not target.searching):
@@ -125,6 +158,19 @@ class FollowControllerNode(Node):
         linear = self.linear_gain * width_error
         linear = max(-self.max_linear * 0.5, min(self.max_linear, linear))
 
+        # Modo HAND: el ancho es ficticio (0.08 fijo), no hay estimacion real
+        # de distancia -> capear el avance; el LiDAR (stop_distance) frena cerca.
+        if self.current_target.target_id == -2:
+            linear = min(linear, self.hand_max_linear)
+
+        # Floor de velocidad: los motores no vencen la friccion estatica con
+        # comandos muy chicos -> redondear al minimo util (solo si hay intencion
+        # real de moverse; el "quieto por distancia alcanzada" queda en 0).
+        if 0.0 < linear < self.min_linear:
+            linear = self.min_linear if width_error > 0.02 else 0.0
+        elif -self.min_linear < linear < 0.0:
+            linear = -self.min_linear if width_error < -0.02 else 0.0
+
         if self.front_obstacle_distance < self.stop_distance:
             linear = min(0.0, linear)
             # Girar hacia el lado con más espacio libre
@@ -141,6 +187,29 @@ class FollowControllerNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = FollowControllerNode()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
+
+    # Al recibir SIGTERM/SIGINT publicar Twist cero ANTES de morir: el OpenCR
+    # mantiene el ultimo comando, asi que sin esto un `pkill` (sin -9) deja al
+    # robot moviendose indefinidamente.
+    def _stop_and_exit(signum, frame):
+        try:
+            for _ in range(5):
+                node.publish_stop()
+                time.sleep(0.03)
+        finally:
+            raise SystemExit(0)
+
+    signal.signal(signal.SIGTERM, _stop_and_exit)
+    signal.signal(signal.SIGINT, _stop_and_exit)
+
+    try:
+        rclpy.spin(node)
+    finally:
+        try:
+            for _ in range(5):
+                node.publish_stop()
+                time.sleep(0.03)
+        except Exception:
+            pass
+        node.destroy_node()
+        rclpy.shutdown()
