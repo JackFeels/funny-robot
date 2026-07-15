@@ -61,6 +61,11 @@ class FollowControllerNode(Node):
         # Si /target_info deja de llegar (murio el selector/tracker/camara),
         # detenerse en vez de repetir el ultimo comando para siempre.
         self.declare_parameter('target_timeout', 0.8)
+        # El LDS-01 esta montado en el chasis rotado respecto al frente fisico
+        # del robot. Sin esto, el sector "frente" del scan apunta a otro lado
+        # y la evasion no ve los obstaculos reales de adelante. Medido con una
+        # caja al frente de la camara: la caja aparecia a -37 -> offset = +37.
+        self.declare_parameter('lidar_yaw_offset_deg', 37.0)
 
         self.desired_width = float(self.get_parameter('desired_width').value)
         self.linear_gain = float(self.get_parameter('linear_gain').value)
@@ -73,6 +78,7 @@ class FollowControllerNode(Node):
         self.min_linear = float(self.get_parameter('min_linear').value)
         self.hand_max_linear = float(self.get_parameter('hand_max_linear').value)
         self.target_timeout = float(self.get_parameter('target_timeout').value)
+        self.lidar_yaw_offset = np.radians(float(self.get_parameter('lidar_yaw_offset_deg').value))
 
         self.timer = self.create_timer(0.1, self.control_loop)
 
@@ -104,7 +110,9 @@ class FollowControllerNode(Node):
             return
 
         angles = msg.angle_min + np.arange(n) * msg.angle_increment
-        angles = (angles + np.pi) % (2 * np.pi) - np.pi
+        # Corregir el montaje del LDS: pasar de frame_lidar a frame_robot
+        # sumando el offset -> asi el sector "frente" apunta al frente fisico.
+        angles = (angles + self.lidar_yaw_offset + np.pi) % (2 * np.pi) - np.pi
         ranges = np.array(msg.ranges, dtype=np.float32)
 
         self.front_obstacle_distance = self._sector_min(ranges, angles, -30,  30)
