@@ -21,6 +21,11 @@ class TargetSelectorNode(Node):
 
         self.latest_greeting = False
         self.latest_hand = None
+        # Timestamp de la ultima mano valida. Sin esto, si gesture_detector
+        # deja de publicar (crash) latest_hand queda congelado en el ultimo
+        # valor y el lock HAND se pega para siempre.
+        self.last_hand_time = 0.0
+        self.hand_timeout = 0.5  # s: mano mas vieja que esto = "no hay mano"
         self.latest_people = []
         self.locked_id = -1
         # Ventana de gracia en TIEMPO REAL (no ciclos): update_target puede
@@ -48,12 +53,19 @@ class TargetSelectorNode(Node):
     def hand_callback(self, msg: Point):
         if msg.x >= 0.0 and msg.y >= 0.0:
             self.latest_hand = (msg.x, msg.y)
+            self.last_hand_time = time.monotonic()
         else:
             self.latest_hand = None
         # En modo HAND-only el lock depende solo de la mano (mediapipe ~30 Hz).
         # No hace falta esperar al frame de HOG (~10 Hz) para refrescar el target.
         if self.locked_id == -2:
             self.update_target()
+
+    def hand_fresh(self):
+        # La mano cuenta como presente solo si es reciente. Protege contra un
+        # gesture_detector muerto que deja latest_hand congelado.
+        return (self.latest_hand is not None
+                and (time.monotonic() - self.last_hand_time) < self.hand_timeout)
 
     def people_callback(self, msg: TrackedPersonArray):
         self.latest_people = msg.persons
@@ -71,7 +83,7 @@ class TargetSelectorNode(Node):
         # 0) HAND-mode (target_id == -2): seguimos la mano directamente,
         #    sin depender de IDs de HOG. Persiste mientras haya mano detectada.
         if self.locked_id == -2:
-            if self.latest_hand is not None:
+            if self.hand_fresh():
                 hx, hy = self.latest_hand
                 target_msg.locked = True
                 target_msg.target_id = -2
@@ -154,7 +166,7 @@ class TargetSelectorNode(Node):
                 self.last_target_position = None
 
         # 4) Si no hay target bloqueado, intentar elegir uno con saludo + mano
-        if self.locked_id == -1 and self.latest_greeting and self.latest_hand is not None:
+        if self.locked_id == -1 and self.latest_greeting and self.hand_fresh():
             hx, hy = self.latest_hand
 
             best_person = None
