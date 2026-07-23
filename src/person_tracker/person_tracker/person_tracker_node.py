@@ -56,10 +56,21 @@ class PersonTrackerNode(Node):
 
         self.next_id = 1
         self.tracks = {}
-        self.max_missed = 8
+        # Elevado de 8 a 20: mientras el robot gira, HOG suele fallar 3-8 frames
+        # seguidos por motion blur; con 8 frames de tolerancia el track moria
+        # justo cuando el robot mas necesitaba mantenerlo.
+        self.max_missed = 20
 
         self.frame_count = 0
-        self.process_every_n_frames = 3
+        # 2 -> 1: procesar cada frame. HOG a 320x240 corre ~50 ms en Nano ->
+        # cuello de botella baja de ~10 Hz a ~18 Hz, mas rapido que el barrido
+        # de la camara al girar (evita perder al target).
+        self.process_every_n_frames = 1
+
+        # HOG es cuadratico en pixeles -> procesar a 320x240 (4x mas rapido) y
+        # publicar coords normalizadas usando el tamaño reducido.
+        self.process_width = 320
+        self.process_height = 240
 
         self.get_logger().info(f'Person tracker listening on: {self.image_topic}')
 
@@ -110,20 +121,23 @@ class PersonTrackerNode(Node):
             self.get_logger().error(f'cv_bridge error: {e}')
             return
 
+        # Resize a baja resolucion para que HOG vuele en la Nano.
+        frame = cv2.resize(frame, (self.process_width, self.process_height))
+
         rects, _ = self.hog.detectMultiScale(
             frame,
-            winStride=(4, 8),
+            winStride=(8, 8),
             padding=(8, 8),
-            scale=1.05
+            scale=1.1
         )
 
         # NMS para quitar duplicados
         rects = self.non_max_suppression(rects, overlapThresh=0.5)
 
-        # Filtrar cajas pequeñas
+        # Filtrar cajas pequenas (escaladas al nuevo tamaño: ~30% del ancho/alto)
         filtered = []
         for (x, y, w, h) in rects:
-            if w >= 60 and h >= 120:
+            if w >= 30 and h >= 60:
                 filtered.append((x, y, w, h))
 
         rects = filtered
@@ -149,7 +163,10 @@ class PersonTrackerNode(Node):
                     best_iou = score_iou
                     best_idx = idx
 
-            if best_idx >= 0 and best_iou > 0.3:
+            # IoU baja de 0.3 a 0.15: al girar el robot rapido, el bbox del
+            # target se desplaza en el frame y la IoU con el frame anterior
+            # cae; con 0.3 el matching fallaba y se creaba un ID nuevo.
+            if best_idx >= 0 and best_iou > 0.15:
                 det_box, _ = detections[best_idx]
                 used_detection_indices.add(best_idx)
                 updated_tracks[track_id] = {'bbox': det_box, 'missed': 0}

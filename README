@@ -1,75 +1,187 @@
-# PROYECTO_TURTLEBOT
+# FUNNY-ROBOT
 
-## Descripción
-Proyecto de programación y control de un TurtleBot3 con ROS 2 Humble.
-El robot detecta a una persona que lo saluda con la mano y la sigue.
+Robot seguidor de personas activado por gestos.
 
-Hardware objetivo: TurtleBot3 + **Jetson Nano** (no Orin). Varias decisiones
-del código (HOG, salto de frames, MediaPipe lite, QoS best_effort) están
-pensadas para el límite de recursos de la Nano.
+El robot detecta a la persona que lo saluda con la palma abierta, la bloquea
+como objetivo y la sigue de forma autónoma manteniendo distancia y esquivando
+obstáculos con el LiDAR.
 
-## Requisitos Previos
-- ROS 2 Humble instalado
-- Paquetes del TurtleBot3
-- Python 3.x
-- v4l2_camera (`sudo apt install ros-humble-v4l2-camera`)
-- MediaPipe (por pip; en la Jetson Nano usar el wheel para aarch64):
-  `pip3 install mediapipe`
+## Hardware
 
-## Instalación
+| Componente | Detalle |
+|---|---|
+| Plataforma | TurtleBot3 **Waffle** (separación de ruedas 0.287 m) |
+| Computador | Jetson Nano — JetPack 4.6 / L4T r32.7.6, Ubuntu 18.04, Python 3.6 |
+| Cámara | Logitech C920 — `/dev/video0` |
+| LiDAR | LDS-01 — `/dev/ttyUSB0` |
+| Controladora | OpenCR — `/dev/ttyACM0` |
 
-### 1. Clonar el repositorio
+Varias decisiones del código (HOG en vez de CNN, salto de frames, resolución
+reducida, QoS best_effort) están pensadas para el límite de recursos de la Nano.
+
+## Por qué Docker
+
+ROS 2 Humble requiere Ubuntu 22.04, pero la Jetson Nano solo llega a Ubuntu
+18.04 (JetPack 4.6). Por eso **todo corre dentro de un contenedor** con Humble
+ya compilado para la Nano:
+
 ```bash
-cd ~/Documents
-git clone https://github.com/JackFeels/funny-robot.git
-cd funny-robot
+docker pull dustynv/ros:humble-desktop-l4t-r32.7.1
 ```
 
-### 2. Compilar
+El contenedor se crea una sola vez, montando el workspace del host y con
+acceso a la GPU, la cámara y los puertos serie:
+
 ```bash
-source /opt/ros/humble/setup.bash
-colcon build
+docker run -d --name funny-robot \
+  --runtime nvidia --privileged --network host --ipc host \
+  -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES=all \
+  -e DISPLAY=:0 -e XAUTHORITY=/run/user/1000/gdm/Xauthority \
+  -v /run/user/1000/gdm/Xauthority:/run/user/1000/gdm/Xauthority:ro \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -v $HOME/funny-robot:/workspace \
+  -w /workspace \
+  dustynv/ros:humble-desktop-l4t-r32.7.1 tail -f /dev/null
+```
+
+> `DISPLAY` y `XAUTHORITY` no son opcionales: MediaPipe usa la GPU vía EGL y
+> falla con `eglChooseConfig() returned no matching configuration` si no
+> encuentra un display X activo. Funciona sin monitor HDMI conectado, porque
+> Xorg sigue corriendo. Tras cada reinicio hay que autorizar el acceso con
+> `xhost +local:` (el script de arranque ya lo hace).
+
+## Dependencias dentro del contenedor
+
+MediaPipe no tiene wheel oficial para Python 3.6 + aarch64. Se usa el build no
+oficial de [PINTO0309/mediapipe-bin](https://github.com/PINTO0309/mediapipe-bin)
+(v0.8.5, cp36, CUDA 10.2), instalado **sin dependencias** para evitar que pip
+intente compilar `opencv-contrib-python` desde fuente (tarda horas y agota la
+memoria de la Nano):
+
+```bash
+pip3 install --no-cache-dir absl-py "attrs>=19.1.0" "protobuf>=3.11,<4" dataclasses
+pip3 install --no-cache-dir --no-deps mediapipe-0.8.5_cuda102-cp36-cp36m-linux_aarch64.whl
+```
+
+OpenCV 4.5, `cv_bridge`, `rclpy` y `v4l2_camera` ya vienen en la imagen.
+
+## Paquetes externos a compilar
+
+Se clonan dentro de `src/` y se compilan junto al proyecto:
+
+```bash
+git clone --depth 1 https://github.com/ROBOTIS-GIT/turtlebot3.git        # usar tag 2.1.5
+git clone --depth 1 https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+git clone --depth 1 https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+git clone --depth 1 https://github.com/ROBOTIS-GIT/hls_lfcd_lds_driver.git
+```
+
+> En `turtlebot3` hay que usar el tag **2.1.5**: la rama `main` usa una API de
+> `rclcpp` más nueva que la de la imagen y no compila.
+
+## Compilar
+
+Dentro del contenedor:
+
+```bash
+source /opt/ros/humble/install/setup.bash
+cd /workspace
+colcon build --symlink-install
 source install/setup.bash
 ```
 
-> También podés usar el `Makefile`: `make build`, `make gesture`, `make tracker`, etc. (`make help`).
+> Si se modifica algún `.msg` de `tb3_interfaces` hay que recompilar **todo**
+> (`colcon build` completo), no solo el paquete que lo usa.
 
-## CAMARA
+## Ejecutar
+
+Desde el host de la Jetson:
 
 ```bash
-# C922
-source /opt/ros/humble/setup.bash
-ros2 run v4l2_camera v4l2_camera_node --ros-args -p video_device:=/dev/video2 -p image_size:=[640,480]
-
-# FACETIME
-source /opt/ros/humble/setup.bash
-ros2 run v4l2_camera v4l2_camera_node --ros-args -p video_device:=/dev/video0 -p image_size:=[640,480]
+./scripts/start_robot.sh            # lanza todo (el robot puede moverse)
+./scripts/start_robot.sh --no-move  # sin follow_controller: robot quieto
+./scripts/stop_robot.sh             # parada de emergencia
 ```
 
-## NODOS
+El arranque deja un stream de debug en `http://<ip-jetson>:8080` con el video,
+los FPS y el estado del objetivo (LOCKED / SEARCHING / NONE).
 
-Cada nodo en su propia terminal, tras `source /opt/ros/humble/setup.bash` y
-`source ~/Documents/funny-robot/install/setup.bash`.
+Los nodos se lanzan con auto-restart: si alguno crashea, revive solo en ~2 s.
+
+### Lanzar nodos a mano
 
 ```bash
-# GESTURE_DETECTOR
-ros2 run gesture_detector gesture_detector_node --ros-args -p image_topic:=/image_raw
+# Cámara
+ros2 run v4l2_camera v4l2_camera_node --ros-args \
+  -p video_device:=/dev/video0 -p image_size:=[640,480]
 
-# PERSON_TRACKER
-ros2 run person_tracker person_tracker_node --ros-args -p image_topic:=/image_raw
+# LiDAR
+ros2 run hls_lfcd_lds_driver hlds_laser_publisher --ros-args \
+  -p port:=/dev/ttyUSB0 -p frame_id:=base_scan
 
-# TARGET_SELECTOR
-ros2 run target_selector target_selector_node
+# Driver del robot (Waffle)
+ros2 run turtlebot3_node turtlebot3_ros --ros-args \
+  --params-file install/turtlebot3_node/share/turtlebot3_node/param/waffle.yaml
 
-# FOLLOW_CONTROLLER
+# Nodos del proyecto
+ros2 run gesture_detector  gesture_detector_node  --ros-args -p image_topic:=/image_raw
+ros2 run person_tracker    person_tracker_node    --ros-args -p image_topic:=/image_raw
+ros2 run target_selector   target_selector_node
 ros2 run follow_controller follow_controller_node
 
-# DEBUG_VISUALIZER (idealmente correrlo en un PC remoto, no en la Nano: abre ventana OpenCV)
+# Visualizador (requiere pantalla; en headless usar tools/stream.py)
 ros2 run debug_visualizer debug_visualizer_node --ros-args -p image_topic:=/image_raw
 ```
 
-## Launch (todo junto)
+## Arquitectura
 
-```bash
-ros2 launch tb3_bringup_custom follow_demo.launch.py
 ```
+Cámara C920 ──> /image_raw ─┬─> gesture_detector ──> /greeting_detected
+                            │                        /hand_center
+                            └─> person_tracker   ──> /tracked_persons
+                                                          │
+                                     target_selector <────┘
+                                           │
+                                           v
+                                     /target_info
+                                           │
+LiDAR ──> /scan ──> follow_controller <────┘
+                           │
+                           v
+                       /cmd_vel ──> turtlebot3_node ──> OpenCR ──> motores
+```
+
+| Nodo | Responsabilidad |
+|---|---|
+| `gesture_detector` | MediaPipe Hands en GPU. Detecta palma abierta (4 dedos extendidos) |
+| `person_tracker` | HOG + NMS + IoU. Detecta personas y les da un ID estable |
+| `target_selector` | Decide a quién seguir: saludo + mano dentro de la caja de una persona |
+| `follow_controller` | Control proporcional + evasión con LiDAR. Publica `/cmd_vel` |
+| `debug_visualizer` | Visualización con OpenCV (necesita pantalla) |
+| `tb3_interfaces` | Mensajes propios: `TargetInfo`, `TrackedPerson` |
+
+## Parámetros útiles
+
+`follow_controller`:
+
+| Parámetro | Default | Para qué sirve |
+|---|---|---|
+| `angular_gain` | 0.9 | Ganancia del giro. Más alto = más reactivo, más overshoot |
+| `max_angular` | 0.35 | Giro máximo. Si sube demasiado, el tracker pierde al objetivo |
+| `angular_deadband` | 0.08 | Zona muerta central: evita oscilar cuando ya está encuadrado |
+| `min_linear` | 0.05 | Piso de velocidad: por debajo los motores no vencen la fricción |
+| `stop_distance` | 0.45 | Distancia a la que frena por obstáculo |
+| `min_obstacle_range` | 0.18 | Descarta el auto-eco del propio chasis en el LiDAR |
+| `lidar_yaw_offset_deg` | 37.0 | Corrección del montaje rotado del LDS-01 |
+| `target_timeout` | 0.8 | Si `/target_info` deja de llegar, el robot se detiene |
+
+## Notas de despliegue
+
+- El OpenCR **retiene el último comando**: si se mata el controlador sin
+  publicar un cero, el robot sigue moviéndose. `stop_robot.sh` lo cubre.
+- El LDS-01 reporta `0.0` en mediciones inválidas y ve partes del propio robot
+  a ~14 cm; ambos casos se filtran en `follow_controller`.
+- El LiDAR está montado rotado respecto al frente físico; el offset se corrige
+  por software (`lidar_yaw_offset_deg`).
+- Si `hostname -I` devuelve solo `172.17.0.1`, la Jetson **no tiene red**: esa
+  es la interfaz interna de Docker.

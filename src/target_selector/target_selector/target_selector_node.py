@@ -1,4 +1,5 @@
 import math
+import time
 
 import rclpy
 from rclpy.node import Node
@@ -20,14 +21,25 @@ class TargetSelectorNode(Node):
 
         self.latest_greeting = False
         self.latest_hand = None
+        # Timestamp de la ultima mano valida. Sin esto, si gesture_detector
+        # deja de publicar (crash) latest_hand queda congelado en el ultimo
+        # valor y el lock HAND se pega para siempre.
+        self.last_hand_time = 0.0
+        self.hand_timeout = 0.5  # s: mano mas vieja que esto = "no hay mano"
         self.latest_people = []
         self.locked_id = -1
-        self.last_seen_countdown = 0
-        self.max_lost_cycles = 30 # Numero de ciclos que se considera que el objetivo sigue presente después de perderlo de vista.
+        # Ventana de gracia en TIEMPO REAL (no ciclos): update_target puede
+        # correr a ~10 Hz (HOG) o ~40 Hz (hand-mode), y con un contador de
+        # ciclos la misma constante daba 3 s o 0.7 s segun el modo.
+        self.lost_grace_seconds = 3.0
+        self.lost_deadline = 0.0
         self.last_target_position = None
 
         self.greeting_countdown = 0
-        self.greeting_hold_frames = 10
+        # gesture_detector publica a ~30 Hz; con 30 frames mantenemos el saludo
+        # vivo ~1 s aun si el usuario lo intercala -> el frame del tracker
+        # (~10 Hz) lo atrapa con casi total seguridad.
+        self.greeting_hold_frames = 30
 
     def greeting_callback(self, msg: Bool):
         if msg.data:
@@ -41,8 +53,19 @@ class TargetSelectorNode(Node):
     def hand_callback(self, msg: Point):
         if msg.x >= 0.0 and msg.y >= 0.0:
             self.latest_hand = (msg.x, msg.y)
+            self.last_hand_time = time.monotonic()
         else:
             self.latest_hand = None
+        # En modo HAND-only el lock depende solo de la mano (mediapipe ~30 Hz).
+        # No hace falta esperar al frame de HOG (~10 Hz) para refrescar el target.
+        if self.locked_id == -2:
+            self.update_target()
+
+    def hand_fresh(self):
+        # La mano cuenta como presente solo si es reciente. Protege contra un
+        # gesture_detector muerto que deja latest_hand congelado.
+        return (self.latest_hand is not None
+                and (time.monotonic() - self.last_hand_time) < self.hand_timeout)
 
     def people_callback(self, msg: TrackedPersonArray):
         self.latest_people = msg.persons
@@ -57,6 +80,32 @@ class TargetSelectorNode(Node):
         target_msg.width = 0.0
         target_msg.height = 0.0
 
+        # 0) HAND-mode (target_id == -2): seguimos la mano directamente,
+        #    sin depender de IDs de HOG. Persiste mientras haya mano detectada.
+        if self.locked_id == -2:
+            if self.hand_fresh():
+                hx, hy = self.latest_hand
+                target_msg.locked = True
+                target_msg.target_id = -2
+                target_msg.cx = hx
+                target_msg.cy = hy
+                target_msg.width = 0.08
+                target_msg.height = 0.15
+                self.last_target_position = (hx, hy)
+                self.lost_deadline = time.monotonic() + self.lost_grace_seconds
+                self.target_pub.publish(target_msg)
+                return
+            # Sin mano: misma ventana de gracia que HOG
+            if time.monotonic() < self.lost_deadline and self.last_target_position is not None:
+                target_msg.searching = True
+                target_msg.cx = self.last_target_position[0]
+                target_msg.cy = self.last_target_position[1]
+                self.target_pub.publish(target_msg)
+                return
+            else:
+                self.locked_id = -1
+                self.last_target_position = None
+
         # 1) Si ya hay un target bloqueado, intentar mantenerlo por ID
         if self.locked_id != -1:
             for p in self.latest_people:
@@ -69,7 +118,7 @@ class TargetSelectorNode(Node):
                     target_msg.height = p.height
 
                     self.last_target_position = (p.cx, p.cy)
-                    self.last_seen_countdown = self.max_lost_cycles
+                    self.lost_deadline = time.monotonic() + self.lost_grace_seconds
                     self.target_pub.publish(target_msg)
                     return
 
@@ -85,8 +134,10 @@ class TargetSelectorNode(Node):
                         best_dist = d
                         best_person = p
 
-                # Umbral de cercanía para reasignar
-                if best_person is not None and best_dist < 0.2:
+                # Umbral de cercanía para reasignar. 0.2 -> 0.35: al girar rapido
+                # el bbox salta hasta 20 % de frame entre updates de HOG, con 0.2
+                # el recover fallaba y perdiamos el lock al primer tramo giratorio.
+                if best_person is not None and best_dist < 0.35:
                     self.locked_id = best_person.id
 
                     target_msg.locked = True
@@ -97,18 +148,25 @@ class TargetSelectorNode(Node):
                     target_msg.height = best_person.height
 
                     self.last_target_position = (best_person.cx, best_person.cy)
-                    self.last_seen_countdown = self.max_lost_cycles
+                    self.lost_deadline = time.monotonic() + self.lost_grace_seconds
                     self.target_pub.publish(target_msg)
                     return
 
-            # 3) Si no pudo recuperar, descontar tiempo
-            self.last_seen_countdown -= 1
-            if self.last_seen_countdown <= 0:
+            # 3) Si no pudo recuperar, descontar tiempo. Mientras dure la ventana
+            #    de gracia avisamos "searching" con la ultima posicion conocida,
+            #    para que el controlador gire a buscar en vez de frenar.
+            if time.monotonic() < self.lost_deadline and self.last_target_position is not None:
+                target_msg.searching = True
+                target_msg.cx = self.last_target_position[0]
+                target_msg.cy = self.last_target_position[1]
+                self.target_pub.publish(target_msg)
+                return
+            else:
                 self.locked_id = -1
                 self.last_target_position = None
 
         # 4) Si no hay target bloqueado, intentar elegir uno con saludo + mano
-        if self.locked_id == -1 and self.latest_greeting and self.latest_hand is not None and len(self.latest_people) > 0:
+        if self.locked_id == -1 and self.latest_greeting and self.hand_fresh():
             hx, hy = self.latest_hand
 
             best_person = None
@@ -121,14 +179,16 @@ class TargetSelectorNode(Node):
                 x2 = p.cx + p.width / 2.0
                 y2 = p.cy + p.height / 2.0
 
-                # Expandimos la caja para tolerar mano levantada y cajas mal ajustadas
-                expand_x = p.width * 0.35
-                expand_y = p.height * 0.60
+                # Expandimos generosamente hacia arriba para mano levantada,
+                # y a los lados para cajas HOG mal ajustadas.
+                expand_x = p.width * 0.45
+                expand_top = p.height * 1.20  # mucho mas hacia arriba
+                expand_bot = p.height * 0.40
 
                 ex1 = x1 - expand_x
-                ey1 = y1 - expand_y
+                ey1 = y1 - expand_top
                 ex2 = x2 + expand_x
-                ey2 = y2 + expand_y
+                ey2 = y2 + expand_bot
 
                 hand_inside = (ex1 <= hx <= ex2) and (ey1 <= hy <= ey2)
 
@@ -145,7 +205,7 @@ class TargetSelectorNode(Node):
 
             if best_person is not None:
                 self.locked_id = best_person.id
-                self.last_seen_countdown = self.max_lost_cycles
+                self.lost_deadline = time.monotonic() + self.lost_grace_seconds
                 self.last_target_position = (best_person.cx, best_person.cy)
 
                 target_msg.locked = True
@@ -154,12 +214,17 @@ class TargetSelectorNode(Node):
                 target_msg.cy = best_person.cy
                 target_msg.width = best_person.width
                 target_msg.height = best_person.height
-
-            elif self.latest_hand is not None:
-                # Fallback: HOG no detectó persona pero hay saludo+mano activos.
-                # Seguir usando el centro de la mano con ancho ficticio pequeño
-                # para que el robot se acerque hasta alcanzar desired_width.
+            else:
+                # Fallback: HOG no detecto a la persona O la mano quedo fuera de
+                # cualquier caja. Igual hay saludo+mano: lockear al centro de la
+                # mano con ancho ficticio para que el robot avance hasta acercarse.
+                # (Antes este fallback estaba dentro de "if len(people) > 0" y
+                #  nunca disparaba cuando HOG no detectaba nada.)
                 hx, hy = self.latest_hand
+                self.locked_id = -2
+                self.lost_deadline = time.monotonic() + self.lost_grace_seconds
+                self.last_target_position = (hx, hy)
+
                 target_msg.locked = True
                 target_msg.target_id = -2
                 target_msg.cx = hx
